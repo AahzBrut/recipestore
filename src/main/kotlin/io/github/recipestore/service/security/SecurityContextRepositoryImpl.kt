@@ -1,6 +1,5 @@
 package io.github.recipestore.service.security
 
-import io.github.recipestore.exception.NotImplementedException
 import io.github.recipestore.util.TOKEN_PREFIX
 import org.springframework.http.HttpHeaders
 import org.springframework.security.authentication.ReactiveAuthenticationManager
@@ -20,7 +19,7 @@ class SecurityContextRepositoryImpl(
 ) : ServerSecurityContextRepository {
 
     override fun save(exchange: ServerWebExchange, context: SecurityContext): Mono<Void> {
-        throw NotImplementedException("Save method not supported")
+        throw UnsupportedOperationException("Save method not supported")
     }
 
     override fun load(exchange: ServerWebExchange): Mono<SecurityContext> {

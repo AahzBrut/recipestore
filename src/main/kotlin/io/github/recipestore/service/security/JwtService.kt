@@ -7,7 +7,6 @@ import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.stereotype.Service
@@ -39,6 +38,7 @@ class JwtService{
                 .body
     }
 
+    @Suppress("UNCHECKED_CAST")
     fun getAuthoritiesFromToken(authToken: String): List<GrantedAuthority> {
         val claims = getClaimsFromToken(authToken)
         val roles= claims.get(ROLE_CLAIMS, List::class.java) as List<String>

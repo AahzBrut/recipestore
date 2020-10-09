@@ -55,6 +55,11 @@ dependencies {
     testImplementation("org.springframework.security:spring-security-test")
 }
 
+
+tasks.withType<Delete> {
+    delete(System.getProperty("user.home") + "\\recipestore")
+}
+
 tasks.withType<Test> {
     useJUnitPlatform()
 }

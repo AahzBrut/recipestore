@@ -9,5 +9,88 @@
         <sql>CREATE SCHEMA REPOSITORY</sql>
     </changeSet>
 
+    <changeSet id="ROLE-001" author="Aahz Brut">
+        <createSequence schemaName="REPOSITORY" sequenceName="ROLE_SEQ"/>
+    </changeSet>
+
+    <changeSet id="ROLE-002" author="Aahz Brut">
+        <createTable schemaName="REPOSITORY" tableName="ROLE">
+            <column name="ROLE_ID" type="INT" defaultValueSequenceNext="REPOSITORY.ROLE_SEQ">
+                <constraints primaryKey="true" primaryKeyName="ROLE_PK"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DESCRIPTION" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="USER-001" author="Aahz Brut">
+        <createSequence schemaName="REPOSITORY" sequenceName="USER_SEQ"/>
+    </changeSet>
+
+    <changeSet id="USER-002" author="Aahz Brut">
+        <createTable schemaName="REPOSITORY" tableName="USER">
+            <column name="USER_ID" type="INT" defaultValueSequenceNext="REPOSITORY.USER_SEQ">
+                <constraints primaryKey="true" primaryKeyName="USER_PK"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PASSWORD" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="USER-ROLE-001" author="Aahz Brut">
+        <createSequence schemaName="REPOSITORY" sequenceName="USER_ROLE_SEQ"/>
+    </changeSet>
+
+    <changeSet id="USER_ROLE-002" author="Aahz Brut">
+        <createTable schemaName="REPOSITORY" tableName="USER_ROLE">
+            <column name="USER_ROLE_ID" type="INT" defaultValueSequenceNext="REPOSITORY.USER_ROLE_SEQ">
+                <constraints primaryKey="true" primaryKeyName="USER_ROLE_PK"/>
+            </column>
+            <column name="USER_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ROLE_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="USER_ROLE-003" author="Aahz Brut">
+        <addForeignKeyConstraint baseColumnNames="USER_ID" baseTableName="USER_ROLE"
+                                 constraintName="FK-USER_ROLE-USER"
+                                 baseTableSchemaName="REPOSITORY"
+                                 referencedTableSchemaName="REPOSITORY"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+                                 referencedColumnNames="USER_ID" referencedTableName="USER"/>
+        <addForeignKeyConstraint baseColumnNames="ROLE_ID" baseTableName="USER_ROLE"
+                                 baseTableSchemaName="REPOSITORY"
+                                 referencedTableSchemaName="REPOSITORY"
+                                 constraintName="FK-USER_ROLE-ROLE"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+                                 referencedColumnNames="ROLE_ID" referencedTableName="ROLE"/>
+    </changeSet>
+
+    <changeSet id="default-data-001" author="Aahz Brut">
+        <insert schemaName="REPOSITORY" tableName="ROLE">
+            <column name="NAME" value="ADMIN"/>
+        </insert>
+        <insert schemaName="REPOSITORY" tableName="ROLE">
+            <column name="NAME" value="USER"/>
+        </insert>
+        <insert schemaName="REPOSITORY" tableName="USER">
+            <column name="NAME" value="user"/>
+            <column name="PASSWORD" value="123"/>
+        </insert>
+        <insert schemaName="REPOSITORY" tableName="USER_ROLE">
+            <column name="USER_ID" valueComputed="SELECT USER_ID FROM REPOSITORY.USER WHERE NAME='user'"/>
+            <column name="ROLE_ID" valueComputed="SELECT ROLE_ID FROM REPOSITORY.ROLE WHERE NAME='USER'"/>
+        </insert>
+    </changeSet>
 
 </databaseChangeLog>

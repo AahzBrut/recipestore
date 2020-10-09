@@ -1,5 +1,6 @@
 package io.github.recipestore.config
 
+import io.github.recipestore.controller.USER_LOGIN_PATH
 import org.springframework.context.annotation.Bean
 import org.springframework.http.HttpStatus
 import org.springframework.security.access.AccessDeniedException
@@ -38,7 +39,7 @@ class WebSecurityConfig(
                 .authenticationManager(authenticationManager)
                 .securityContextRepository(securityContextRepository)
                 .authorizeExchange()
-                .pathMatchers("/", "/login", "/favicon.ico", "/h2-console").permitAll()
+                .pathMatchers("/", USER_LOGIN_PATH, "/favicon.ico", "/h2-console").permitAll()
                 .pathMatchers("/controller").hasRole("ADMIN")
                 .anyExchange().authenticated()
                 .and()
