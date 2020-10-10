@@ -3,11 +3,12 @@
     {
       "name": "jwt.secret",
       "type": "java.lang.String",
-      "description": "Description for jwt.secret."
+      "description": "Secret word for token encryption."
     },
     {
       "name": "jwt.expiration",
       "type": "java.lang.String",
-      "description": "Description for jwt.expiration."
+      "description": "Number of seconds till token will expire."
     }
-  ] }
+  ]
+}
