@@ -3,12 +3,12 @@ package io.github.recipestore.domain
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
 
-@Table("ROLE")
-data class Role(
+@Table("USER_ROLE")
+data class UserRole(
     @Id
     var id: Long?,
 
-    var name: String,
+    var userId: Long?,
 
-    var description: String
+    var roleId: Long?
 )

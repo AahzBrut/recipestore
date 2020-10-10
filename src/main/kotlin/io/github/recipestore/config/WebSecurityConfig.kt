@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
 import org.springframework.security.config.web.server.ServerHttpSecurity
 import org.springframework.security.core.AuthenticationException
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.server.SecurityWebFilterChain
 import org.springframework.security.web.server.context.ServerSecurityContextRepository
 import org.springframework.web.server.ServerWebExchange
@@ -39,10 +41,13 @@ class WebSecurityConfig(
                 .authenticationManager(authenticationManager)
                 .securityContextRepository(securityContextRepository)
                 .authorizeExchange()
-                .pathMatchers("/", USER_LOGIN_PATH, "/favicon.ico", "/h2-console").permitAll()
+                .pathMatchers("/", USER_LOGIN_PATH, "/favicon.ico").permitAll()
                 .pathMatchers("/controller").hasRole("ADMIN")
                 .anyExchange().authenticated()
                 .and()
                 .build()
     }
+
+    @Bean
+    fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
 }

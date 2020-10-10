@@ -19,6 +19,8 @@ class UserController(
     @PostMapping(USER_LOGIN_PATH)
     fun login(@RequestBody request: LoginRequest): Mono<ResponseEntity<Any>> {
 
-        return Mono.empty()
+        return userService
+                .login(request)
+                .map { userName -> ResponseEntity.ok(userName) }
     }
 }
