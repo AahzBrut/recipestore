@@ -1,7 +1,7 @@
 package io.github.recipestore.service.security
 
-import io.github.recipestore.dto.response.RoleResponse
-import io.github.recipestore.dto.response.UserResponse
+import io.github.recipestore.domain.Role
+import io.github.recipestore.domain.User
 import io.github.recipestore.util.ROLE_CLAIMS
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
@@ -53,14 +53,14 @@ class JwtService{
                 .after(Date())
     }
 
-    fun generateToken(user: UserResponse): String {
+    fun generateToken(user: User): String {
         val claims = HashMap<String, Any?>()
-        claims[ROLE_CLAIMS] = listOf(user.roles.map(RoleResponse::name).toList())
+        claims[ROLE_CLAIMS] = listOf(user.roles.map(Role::name).toList())
         val creationDate = Date()
         val expirationDate = Date(creationDate.time + expirationTime.toLong())
         return Jwts.builder()
                 .setClaims(claims)
-                .setSubject(user.userName)
+                .setSubject(user.name)
                 .setIssuedAt(creationDate)
                 .setExpiration(expirationDate)
                 .signWith(Keys.hmacShaKeyFor(secret.toByteArray()))

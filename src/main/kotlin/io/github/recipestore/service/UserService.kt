@@ -1,6 +1,5 @@
 package io.github.recipestore.service
 
-import io.github.recipestore.domain.User
 import io.github.recipestore.dto.request.LoginRequest
 import io.github.recipestore.repository.UserRepository
 import io.github.recipestore.service.security.JwtService
@@ -15,13 +14,8 @@ class UserService(
     private val jwtService: JwtService
 ) {
 
-    fun login(request: LoginRequest): Mono<String> {
-
-        val user = User(null, request.userName, request.password)
-
-        return userRepository
-            .save(user)
-            .map { it.name }
-
-    }
+    fun login(request: LoginRequest): Mono<String> = userRepository
+        .findByName(request.userName)
+        .filter { encoder.matches(request.password, it.password)}
+        .map { jwtService.generateToken(it)}
 }

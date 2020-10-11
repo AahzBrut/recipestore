@@ -1,4 +1,4 @@
-package io.github.recipestore.converter.outbound
+package io.github.recipestore.converter.writer
 
 import io.github.recipestore.domain.User
 import org.springframework.core.convert.converter.Converter
@@ -6,7 +6,9 @@ import org.springframework.data.convert.WritingConverter
 import org.springframework.data.r2dbc.mapping.OutboundRow
 import org.springframework.data.r2dbc.mapping.SettableValue
 import org.springframework.data.relational.core.sql.SqlIdentifier
+import org.springframework.stereotype.Service
 
+@Service
 @WritingConverter
 class UserWriteConverter : Converter<User, OutboundRow> {
 
