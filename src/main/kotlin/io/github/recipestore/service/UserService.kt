@@ -21,9 +21,9 @@ class UserService(
         .flatMap { user ->
             Mono.just(user)
                 .zipWith(userRoleService.getUserRoles(user.id!!).collectList())
-                .map {
-                    it.t1.roles = it.t2.toSet()
-                    jwtService.generateToken(it.t1)
+                .map { tuple ->
+                    tuple.t1.roles = tuple.t2.toSet()
+                    jwtService.generateToken(tuple.t1)
                 }
         }
 }
