@@ -79,9 +79,11 @@
     <changeSet id="default-data-001" author="Aahz Brut">
         <insert schemaName="REPOSITORY" tableName="ROLE">
             <column name="NAME" value="ADMIN"/>
+            <column name="DESCRIPTION" value="Admin role"/>
         </insert>
         <insert schemaName="REPOSITORY" tableName="ROLE">
             <column name="NAME" value="USER"/>
+            <column name="DESCRIPTION" value="User role"/>
         </insert>
         <insert schemaName="REPOSITORY" tableName="USER">
             <column name="NAME" value="user"/>

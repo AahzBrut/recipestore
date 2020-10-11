@@ -18,5 +18,5 @@ data class User(
     var password: String,
 
     @Transient
-    var roles: Set<Role> = emptySet()
+    var roles: Set<Role> = mutableSetOf()
 )
