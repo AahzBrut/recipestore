@@ -18,7 +18,7 @@ class IngredientController {
 
         return Flux
             .just("Ingredient1", "Ingredient2", "Ingredient3")
-            .doOnSubscribe{ log("$principal in $INGREDIENTS_GET_ALL") }
+            .doOnSubscribe{ log("User: ${principal.name} in $INGREDIENTS_GET_ALL") }
     }
 
 
