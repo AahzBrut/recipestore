@@ -9,6 +9,7 @@ import java.security.Principal
 
 
 const val INGREDIENTS_PATH = "/api/v1/ingredients"
+const val INGREDIENTS_BY_ID_PATH = "/api/v1/ingredients/{id}"
 
 @RestController
 class IngredientController {
