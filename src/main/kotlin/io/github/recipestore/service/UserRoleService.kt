@@ -14,6 +14,6 @@ class UserRoleService(
     fun getUserRoles(userId: Long) : Flux<Role> =
         userRoleRepository
             .findAllByUserId(userId)
-            .flatMap { it.roleId?.let { roleId -> roleService.getRolesById(roleId) } }
+            .flatMap {  userRole -> roleService.getRolesById(userRole.roleId) }
 
 }

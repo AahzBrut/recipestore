@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="USER-001" author="Aahz Brut">
+        <createSequence schemaName="REPOSITORY" sequenceName="USER_SEQ"/>
+    </changeSet>
+
+    <changeSet id="USER-002" author="Aahz Brut">
+        <createTable schemaName="REPOSITORY" tableName="USER">
+            <column name="USER_ID" type="INT" defaultValueSequenceNext="REPOSITORY.USER_SEQ">
+                <constraints primaryKey="true" primaryKeyName="USER_PK"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PASSWORD" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+</databaseChangeLog>

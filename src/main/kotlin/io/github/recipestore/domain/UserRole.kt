@@ -11,8 +11,8 @@ data class UserRole(
     var id: Long?,
 
     @Column("USER_ID")
-    var userId: Long?,
+    var userId: Long,
 
     @Column("ROLE_ID")
-    var roleId: Long?
+    var roleId: Long
 )
