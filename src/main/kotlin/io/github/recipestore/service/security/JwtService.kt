@@ -16,7 +16,7 @@ import kotlin.collections.set
 
 
 @Service
-class JwtService{
+class JwtService {
 
     @Value("\${jwt.secret}")
     private lateinit var secret: String
@@ -26,44 +26,45 @@ class JwtService{
 
     fun extractUsername(authToken: String): String? {
         return getClaimsFromToken(authToken)
-                .subject
+            .subject
     }
 
     fun getClaimsFromToken(authToken: String): Claims {
         val key: String = Base64.getEncoder().encodeToString(secret.toByteArray())
         return Jwts.parserBuilder()
-                .setSigningKey(key)
-                .build()
-                .parseClaimsJws(authToken)
-                .body
+            .setSigningKey(key)
+            .build()
+            .parseClaimsJws(authToken)
+            .body
     }
 
     @Suppress("UNCHECKED_CAST")
     fun getAuthoritiesFromToken(authToken: String): List<GrantedAuthority> {
         val claims = getClaimsFromToken(authToken)
-        val roles= claims.get(ROLE_CLAIMS, List::class.java) as List<String>
+        val roles = claims[ROLE_CLAIMS] as List<String>
         return roles
-                .map(::SimpleGrantedAuthority)
-                .toList()
+            .map{ "ROLE_$it"}
+            .map(::SimpleGrantedAuthority)
+            .toList()
     }
 
     fun validateToken(authToken: String): Boolean {
         return getClaimsFromToken(authToken)
-                .expiration
-                .after(Date())
+            .expiration
+            .after(Date())
     }
 
     fun generateToken(user: User): String {
         val claims = HashMap<String, Any?>()
-        claims[ROLE_CLAIMS] = listOf(user.roles.map(Role::name).toList())
+        claims[ROLE_CLAIMS] = user.roles.map(Role::name).toList()
         val creationDate = Date()
         val expirationDate = Date(creationDate.time + expirationTime.toLong())
         return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(user.name)
-                .setIssuedAt(creationDate)
-                .setExpiration(expirationDate)
-                .signWith(Keys.hmacShaKeyFor(secret.toByteArray()))
-                .compact()
+            .setClaims(claims)
+            .setSubject(user.name)
+            .setIssuedAt(creationDate)
+            .setExpiration(expirationDate)
+            .signWith(Keys.hmacShaKeyFor(secret.toByteArray()))
+            .compact()
     }
 }

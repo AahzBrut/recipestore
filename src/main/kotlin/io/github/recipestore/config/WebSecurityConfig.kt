@@ -1,5 +1,6 @@
 package io.github.recipestore.config
 
+import io.github.recipestore.controller.INGREDIENTS_GET_ALL
 import io.github.recipestore.controller.USER_LOGIN_PATH
 import org.springframework.context.annotation.Bean
 import org.springframework.http.HttpStatus
@@ -42,7 +43,7 @@ class WebSecurityConfig(
                 .securityContextRepository(securityContextRepository)
                 .authorizeExchange()
                 .pathMatchers("/", USER_LOGIN_PATH, "/favicon.ico").permitAll()
-                .pathMatchers("/controller").hasRole("ADMIN")
+                .pathMatchers(INGREDIENTS_GET_ALL).hasRole("USER")
                 .anyExchange().authenticated()
                 .and()
                 .build()
