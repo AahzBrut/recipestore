@@ -6,7 +6,7 @@
 
 
     <changeSet id="ROLE-001" author="Aahz Brut">
-        <createSequence schemaName="REPOSITORY" sequenceName="ROLE_SEQ"/>
+        <createSequence schemaName="REPOSITORY" sequenceName="ROLE_SEQ" startValue="0"/>
     </changeSet>
 
     <changeSet id="ROLE-002" author="Aahz Brut">

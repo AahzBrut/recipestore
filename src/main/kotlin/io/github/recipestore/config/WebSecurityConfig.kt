@@ -2,6 +2,7 @@ package io.github.recipestore.config
 
 import io.github.recipestore.controller.INGREDIENTS_PATH
 import io.github.recipestore.controller.USER_LOGIN_PATH
+import io.github.recipestore.controller.USER_SIGNON_PATH
 import org.springframework.context.annotation.Bean
 import org.springframework.http.HttpStatus
 import org.springframework.security.access.AccessDeniedException
@@ -21,32 +22,33 @@ import reactor.core.publisher.Mono
 @EnableWebFluxSecurity
 @EnableReactiveMethodSecurity
 class WebSecurityConfig(
-        private val authenticationManager: ReactiveAuthenticationManager,
-        private val securityContextRepository: ServerSecurityContextRepository
+    private val authenticationManager: ReactiveAuthenticationManager,
+    private val securityContextRepository: ServerSecurityContextRepository
 ) {
 
     @Bean
     fun securityWebFilterChain(httpSecurity: ServerHttpSecurity): SecurityWebFilterChain {
         return httpSecurity
-                .exceptionHandling()
-                .authenticationEntryPoint { swe: ServerWebExchange, _: AuthenticationException? ->
-                    Mono.fromRunnable { swe.response.statusCode = HttpStatus.UNAUTHORIZED }
-                }
-                .accessDeniedHandler { swe: ServerWebExchange, _: AccessDeniedException? ->
-                    Mono.fromRunnable { swe.response.statusCode = HttpStatus.FORBIDDEN }
-                }
-                .and()
-                .csrf().disable()
-                .formLogin().disable()
-                .httpBasic().disable()
-                .authenticationManager(authenticationManager)
-                .securityContextRepository(securityContextRepository)
-                .authorizeExchange()
-                .pathMatchers("/", USER_LOGIN_PATH, "/favicon.ico").permitAll()
-                .pathMatchers(INGREDIENTS_PATH).hasRole("USER")
-                .anyExchange().authenticated()
-                .and()
-                .build()
+            .exceptionHandling()
+            .authenticationEntryPoint { swe: ServerWebExchange, _: AuthenticationException? ->
+                Mono.fromRunnable { swe.response.statusCode = HttpStatus.UNAUTHORIZED }
+            }
+            .accessDeniedHandler { swe: ServerWebExchange, _: AccessDeniedException? ->
+                Mono.fromRunnable { swe.response.statusCode = HttpStatus.FORBIDDEN }
+            }
+            .and()
+            .csrf().disable()
+            .formLogin().disable()
+            .httpBasic().disable()
+            .authenticationManager(authenticationManager)
+            .securityContextRepository(securityContextRepository)
+            .authorizeExchange()
+            .pathMatchers(USER_LOGIN_PATH, USER_SIGNON_PATH, "/favicon.ico").permitAll()
+            .pathMatchers(INGREDIENTS_PATH).hasRole("USER")
+            .pathMatchers("/**").hasRole("ADMIN")
+            .anyExchange().authenticated()
+            .and()
+            .build()
     }
 
     @Bean
