@@ -18,6 +18,7 @@ import java.security.Principal
 
 
 const val USER_LOGIN_PATH = "/api/v1/login"
+const val USER_SIGNON_PATH = "/api/v1/sign-on"
 const val USERS_PATH = "/api/v1/users"
 
 
@@ -43,4 +44,11 @@ class UserController(
         return userService.getAllUsers()
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping(USER_SIGNON_PATH,
+        consumes = [MediaType.APPLICATION_JSON_VALUE],
+        produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun addUser(principal: Principal, @RequestBody request: LoginRequest) : Mono<User> =
+        userService
+            .addUser(request)
 }

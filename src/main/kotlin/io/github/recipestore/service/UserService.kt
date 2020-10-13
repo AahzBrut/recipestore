@@ -1,5 +1,6 @@
 package io.github.recipestore.service
 
+import io.github.recipestore.domain.Roles
 import io.github.recipestore.domain.User
 import io.github.recipestore.dto.request.LoginRequest
 import io.github.recipestore.repository.UserRepository
@@ -39,4 +40,25 @@ class UserService(
                     tuple.t1
                 }
         }
+
+    fun getUser(userId: Long): Mono<User> = userRepository
+        .findById(userId)
+        .flatMap { user ->
+            Mono.just(user)
+                .zipWith(userRoleService.getUserRoles(user.id!!).collectList())
+                .map { tuple ->
+                    tuple.t1.roles = tuple.t2.toSet()
+                    tuple.t1
+                }
+        }
+
+    fun addUser(request: LoginRequest): Mono<User> = Mono.just(request)
+        .map { User(null, it.userName, encoder.encode(it.password)) }
+        .flatMap(userRepository::save)
+        .map {
+            it.also {
+                userRoleService.addRoleToUser(it, setOf(Roles.USER))
+            }
+        }
+        .flatMap { getUser(it.id!!) }
 }
