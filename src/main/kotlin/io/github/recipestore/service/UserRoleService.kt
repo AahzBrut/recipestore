@@ -19,7 +19,7 @@ class UserRoleService(
             .findAllByUserId(userId)
             .flatMap { userRole -> roleService.getRoleById(userRole.roleId) }
 
-    fun addRoleToUser(user: User, roles: Set<Roles>) {
+    fun addRolesToUser(user: User, roles: Set<Roles>) {
 
         user.id?.let { userId ->
             userRoleRepository.deleteAllByUserId(userId)
