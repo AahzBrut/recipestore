@@ -3,6 +3,7 @@ package io.github.recipestore.service
 import io.github.recipestore.domain.Roles
 import io.github.recipestore.domain.User
 import io.github.recipestore.dto.request.LoginRequest
+import io.github.recipestore.dto.request.UserRolesAddRequest
 import io.github.recipestore.repository.UserRepository
 import io.github.recipestore.service.security.JwtService
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -57,8 +58,14 @@ class UserService(
         .flatMap(userRepository::save)
         .map {
             it.also {
-                userRoleService.addRoleToUser(it, setOf(Roles.USER))
+                userRoleService.addRolesToUser(it, setOf(Roles.USER))
             }
         }
         .flatMap { getUser(it.id!!) }
+
+    fun addUserRoles(userId: Long, request: UserRolesAddRequest): Mono<User> = Mono.just(request)
+        .flatMap {
+            userRoleService.addRolesToUser(User(userId, "", ""), it.roles)
+            getUser(userId)
+        }
 }

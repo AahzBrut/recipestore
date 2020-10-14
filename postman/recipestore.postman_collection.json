@@ -140,6 +140,66 @@
 			"name": "Users",
 			"item": [
 				{
+					"name": "User sign on",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"pavel\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/sign-on",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"sign-on"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"admin\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get all users",
 					"request": {
 						"method": "GET",
@@ -159,39 +219,41 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Add role to user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"roles\": [\r\n        \"TESTER\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users/1/roles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"1",
+								"roles"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "login",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"userName\": \"user\",\r\n    \"password\": \"123\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/v1/login",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"v1",
-						"login"
-					]
-				}
-			},
-			"response": []
 		},
 		{
 			"name": "Get all ingredients",
@@ -220,7 +282,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sInN1YiI6InVzZXIiLCJpYXQiOjE2MDI0ODI5ODEsImV4cCI6MTYwNTA3NDk4MX0.wegwPRLfZ4XewFQbRfSUyNYTgJKMCFr0KZChbjCYZa2IHd60fdmu99IkSqo5SGE5ppv0m-ejpAKLLyAzqogfEw",
+				"value": "eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIiwiQURNSU4iXSwic3ViIjoiYWRtaW4iLCJpYXQiOjE2MDI2NTU1NjUsImV4cCI6MTYwNTI0NzU2NX0.k3SxL5XSjRlNgiO-hoIANa_ueXLciTgLfcU5QMS9gxUpBBd6--ZELafeqYdOJLVehHtlDJOi99jY5CO-UOot_w",
 				"type": "string"
 			}
 		]
