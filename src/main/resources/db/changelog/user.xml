@@ -20,6 +20,12 @@
             <column name="PASSWORD" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="CREATED" type="TIMESTAMP" defaultValue="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MODIFIED" type="TIMESTAMP" defaultValue="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 
