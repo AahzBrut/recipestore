@@ -24,6 +24,7 @@ const val USER_LOGIN_PATH = "/api/v1/login"
 const val USER_SIGNON_PATH = "/api/v1/sign-on"
 const val USERS_PATH = "/api/v1/users"
 const val USER_ROLES_PATH = "/api/v1/users/{id}/roles"
+const val USER_BY_ID_PATH = "/api/v1/users/{id}"
 
 
 @RestController
@@ -63,4 +64,12 @@ class UserController(
     fun addUserRoles(principal: Principal, @PathVariable id: Long, @RequestBody request: UserRolesAddRequest) : Mono<User> =
         userService
             .addUserRoles(id, request)
+
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping(USER_BY_ID_PATH,
+        consumes = [MediaType.APPLICATION_JSON_VALUE],
+        produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun updateUser(principal: Principal, @PathVariable id: Long, @RequestBody request: LoginRequest) : Mono<User> =
+        userService
+            .updateUser(id, request)
 }

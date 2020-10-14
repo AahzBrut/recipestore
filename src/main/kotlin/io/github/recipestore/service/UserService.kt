@@ -68,4 +68,12 @@ class UserService(
             userRoleService.addRolesToUser(User(userId, "", ""), it.roles)
             getUser(userId)
         }
+
+    fun updateUser(userId: Long, request: LoginRequest): Mono<User> = userRepository.findById(userId)
+        .flatMap {
+            userRepository.updateUser(userId, request.userName, encoder.encode(request.password))
+        }
+        .flatMap {
+            getUser(userId)
+        }
 }
