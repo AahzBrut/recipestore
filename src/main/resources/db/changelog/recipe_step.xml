@@ -4,21 +4,23 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-
-    <changeSet id="INGREDIENT-001" author="Aahz Brut">
-        <createSequence schemaName="REPOSITORY" sequenceName="INGREDIENT_SEQ"/>
+    <changeSet id="RECIPE_STEP-001" author="Aahz Brut">
+        <createSequence schemaName="REPOSITORY" sequenceName="RECIPE_STEP_SEQ"/>
     </changeSet>
 
-    <changeSet id="INGREDIENT-002" author="Aahz Brut">
-        <createTable schemaName="REPOSITORY" tableName="INGREDIENT">
-            <column name="INGREDIENT_ID" type="INT" defaultValueSequenceNext="REPOSITORY.INGREDIENT_SEQ">
-                <constraints primaryKey="true" primaryKeyName="INGREDIENT_PK"/>
+    <changeSet id="RECIPE_STEP-002" author="Aahz Brut">
+        <createTable schemaName="REPOSITORY" tableName="RECIPE_STEP">
+            <column name="RECIPE_STEP_ID" type="INT" defaultValueSequenceNext="RECIPE_STEP_SEQ">
+                <constraints primaryKey="true" primaryKeyName="RECIPE_STEP_PK"/>
             </column>
             <column name="NAME" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="DESCRIPTION" type="VARCHAR(255)"/>
-            <column name="INGREDIENT_CATEGORY_ID" type="INT">
+            <column name="DESCRIPTION" type="CLOB"/>
+            <column name="ORDINAL" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RECIPE_ID" type="INT">
                 <constraints nullable="false"/>
             </column>
             <column name="USER_ID" type="INT">
@@ -32,6 +34,5 @@
             </column>
         </createTable>
     </changeSet>
-
 
 </databaseChangeLog>

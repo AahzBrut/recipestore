@@ -12,6 +12,14 @@
     <include file="/db/changelog/user.xml"/>
     <include file="/db/changelog/role.xml"/>
     <include file="/db/changelog/user_role.xml"/>
+    <include file="/db/changelog/recipe.xml"/>
+    <include file="/db/changelog/recipe_category.xml"/>
+    <include file="/db/changelog/uom.xml"/>
+    <include file="/db/changelog/ingredient.xml"/>
+    <include file="/db/changelog/ingredient_category.xml"/>
+    <include file="/db/changelog/recipe_step.xml"/>
+    <include file="/db/changelog/recipe_step_ingredient.xml"/>
+
     <include file="/db/changelog/constraints.xml"/>
     <include file="/db/changelog/initial_data.xml"/>
 
