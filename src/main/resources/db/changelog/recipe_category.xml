@@ -5,22 +5,20 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
 
-    <changeSet id="INGREDIENT-001" author="Aahz Brut">
-        <createSequence schemaName="REPOSITORY" sequenceName="INGREDIENT_SEQ"/>
+    <changeSet id="RECIPE_CATEGORY-001" author="Aahz Brut">
+        <createSequence schemaName="REPOSITORY" sequenceName="RECIPE_CATEGORY_SEQ"/>
     </changeSet>
 
-    <changeSet id="INGREDIENT-002" author="Aahz Brut">
-        <createTable schemaName="REPOSITORY" tableName="INGREDIENT">
-            <column name="INGREDIENT_ID" type="INT" defaultValueSequenceNext="REPOSITORY.INGREDIENT_SEQ">
-                <constraints primaryKey="true" primaryKeyName="INGREDIENT_PK"/>
+    <changeSet id="RECIPE_CATEGORY-002" author="Aahz Brut">
+        <createTable schemaName="REPOSITORY" tableName="RECIPE_CATEGORY">
+            <column name="RECIPE_CATEGORY_ID" type="INT" defaultValueSequenceNext="REPOSITORY.RECIPE_CATEGORY_SEQ">
+                <constraints primaryKey="true" primaryKeyName="RECIPE_CATEGORY_PK"/>
             </column>
+            <column name="PARENT_CATEGORY_ID" type="INT"/>
             <column name="NAME" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="DESCRIPTION" type="VARCHAR(255)"/>
-            <column name="INGREDIENT_CATEGORY_ID" type="INT">
-                <constraints nullable="false"/>
-            </column>
             <column name="USER_ID" type="INT">
                 <constraints nullable="false"/>
             </column>
@@ -32,6 +30,5 @@
             </column>
         </createTable>
     </changeSet>
-
 
 </databaseChangeLog>
