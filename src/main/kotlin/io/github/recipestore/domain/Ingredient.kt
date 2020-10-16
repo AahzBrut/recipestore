@@ -7,10 +7,10 @@ import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
 
-@Table("REPOSITORY.INGREDIENT_CATEGORY")
-data class IngredientCategory(
+@Table("REPOSITORY.INGREDIENT")
+data class Ingredient(
     @Id
-    @Column("INGREDIENT_CATEGORY_ID")
+    @Column("INGREDIENT_ID")
     var id: Long? = null,
 
     @Column("NAME")
@@ -20,8 +20,8 @@ data class IngredientCategory(
     var description: String,
 
     @JsonIgnore
-    @Column("PARENT_CATEGORY_ID")
-    var parentCategoryId: Long? = null,
+    @Column("INGREDIENT_CATEGORY_ID")
+    var categoryId: Long,
 
     @JsonIgnore
     @Column("USER_ID")
@@ -34,5 +34,8 @@ data class IngredientCategory(
     var modified: LocalDateTime = LocalDateTime.now(),
 
     @Transient
-    var childCategories: List<IngredientCategory> = mutableListOf()
-    )
+    var category: IngredientCategory? = null,
+
+    @Transient
+    var user: User? = null
+)

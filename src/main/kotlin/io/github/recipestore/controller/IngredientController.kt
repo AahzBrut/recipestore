@@ -1,10 +1,20 @@
 package io.github.recipestore.controller
 
+import io.github.recipestore.domain.Ingredient
+import io.github.recipestore.dto.request.IngredientRequest
+import io.github.recipestore.service.IngredientService
 import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import reactor.core.publisher.Flux
+import reactor.core.publisher.Mono
 import java.security.Principal
 
 
@@ -12,21 +22,40 @@ const val INGREDIENTS_PATH = "/api/v1/ingredients"
 const val INGREDIENTS_BY_ID_PATH = "/api/v1/ingredients/{id}"
 
 @RestController
-class IngredientController {
+class IngredientController(
+    private val service: IngredientService
+) {
 
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(INGREDIENTS_PATH)
-    fun getAllIngredients(principal: Principal) : Flux<String> {
+    @PostMapping(INGREDIENTS_PATH,
+        consumes = [MediaType.APPLICATION_JSON_VALUE],
+        produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun addIngredient(principal: Principal, @RequestBody request: IngredientRequest): Mono<Ingredient> =
+        service.addIngredient(principal.name, request)
 
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(INGREDIENTS_BY_ID_PATH,
+        produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun getIngredient(principal: Principal, @PathVariable id: Long): Mono<Ingredient> =
+        service.getIngredient(id)
 
-        return Flux
-            .just("Ingredient1", "Ingredient2", "Ingredient3")
-            .doOnSubscribe{ log("User: ${principal.name} in $INGREDIENTS_PATH") }
-    }
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(INGREDIENTS_PATH,
+        produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun getAllIngredients(principal: Principal): Flux<Ingredient> =
+        service.getAllIngredients()
 
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping(INGREDIENTS_BY_ID_PATH,
+        produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun updateIngredient(principal: Principal, @PathVariable id: Long, @RequestBody request: IngredientRequest): Mono<Ingredient> =
+        service.updateIngredient(principal.name, id, request)
 
-    private fun log(message: String) {
-        println(message)
-    }
+    @ResponseStatus(HttpStatus.OK)
+    @DeleteMapping(INGREDIENTS_BY_ID_PATH,
+        produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun deleteIngredientCategory(principal: Principal, @PathVariable id: Long): Mono<Void> =
+        service
+            .deleteIngredient(id)
 }

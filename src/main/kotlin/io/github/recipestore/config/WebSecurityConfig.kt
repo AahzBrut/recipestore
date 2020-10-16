@@ -1,10 +1,13 @@
 package io.github.recipestore.config
 
-import io.github.recipestore.controller.INGREDIENTS_PATH
 import io.github.recipestore.controller.USER_LOGIN_PATH
 import io.github.recipestore.controller.USER_SIGNON_PATH
+import io.github.recipestore.domain.Roles.ADMIN
+import io.github.recipestore.util.FAVICON_PATH
+import io.github.recipestore.util.ROOT_PATH
 import org.springframework.context.annotation.Bean
-import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatus.FORBIDDEN
+import org.springframework.http.HttpStatus.UNAUTHORIZED
 import org.springframework.security.access.AccessDeniedException
 import org.springframework.security.authentication.ReactiveAuthenticationManager
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity
@@ -31,10 +34,10 @@ class WebSecurityConfig(
         return httpSecurity
             .exceptionHandling()
             .authenticationEntryPoint { swe: ServerWebExchange, _: AuthenticationException? ->
-                Mono.fromRunnable { swe.response.statusCode = HttpStatus.UNAUTHORIZED }
+                Mono.fromRunnable { swe.response.statusCode = UNAUTHORIZED }
             }
             .accessDeniedHandler { swe: ServerWebExchange, _: AccessDeniedException? ->
-                Mono.fromRunnable { swe.response.statusCode = HttpStatus.FORBIDDEN }
+                Mono.fromRunnable { swe.response.statusCode = FORBIDDEN }
             }
             .and()
             .csrf().disable()
@@ -43,9 +46,8 @@ class WebSecurityConfig(
             .authenticationManager(authenticationManager)
             .securityContextRepository(securityContextRepository)
             .authorizeExchange()
-            .pathMatchers(USER_LOGIN_PATH, USER_SIGNON_PATH, "/favicon.ico").permitAll()
-            .pathMatchers(INGREDIENTS_PATH).hasRole("USER")
-            .pathMatchers("/**").hasRole("ADMIN")
+            .pathMatchers(USER_LOGIN_PATH, USER_SIGNON_PATH, FAVICON_PATH).permitAll()
+            .pathMatchers(ROOT_PATH).hasRole(ADMIN.name)
             .anyExchange().authenticated()
             .and()
             .build()
