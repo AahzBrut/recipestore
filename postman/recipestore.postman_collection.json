@@ -208,13 +208,160 @@
 			"name": "Ingredients",
 			"item": [
 				{
-					"name": "Add ingredient category",
+					"name": "Categories",
+					"item": [
+						{
+							"name": "Add ingredient category",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Category 1\",\r\n    \"description\": \"Category description\",\r\n    \"parentCategoryId\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/ingredients/categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"ingredients",
+										"categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get ingredient category",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/ingredients/categories/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"ingredients",
+										"categories",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all ingredient categories",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/ingredients/categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"ingredients",
+										"categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update ingredient category",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Category 1.0\",\r\n    \"description\": \"Updated Category description\",\r\n    \"parentCategoryId\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/ingredients/categories/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"ingredients",
+										"categories",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete ingredient category",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Category 1\",\r\n    \"description\": \"Category description\",\r\n    \"parentCategoryId\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/ingredients/categories/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"ingredients",
+										"categories",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Add ingredient",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Category 1\",\r\n    \"description\": \"Category description\",\r\n    \"parentCategoryId\": null\r\n}",
+							"raw": "{\r\n    \"name\": \"Ingredient 1\",\r\n    \"description\": \"Ingredient description\",\r\n    \"categoryId\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -222,7 +369,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/ingredients/categories",
+							"raw": "http://localhost:8080/api/v1/ingredients",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -231,20 +378,19 @@
 							"path": [
 								"api",
 								"v1",
-								"ingredients",
-								"categories"
+								"ingredients"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Get ingredient category",
+					"name": "Get ingredient",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/ingredients/categories/1",
+							"raw": "http://localhost:8080/api/v1/ingredients/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -254,7 +400,6 @@
 								"api",
 								"v1",
 								"ingredients",
-								"categories",
 								"1"
 							]
 						}
@@ -262,12 +407,12 @@
 					"response": []
 				},
 				{
-					"name": "Get all ingredient categories",
+					"name": "Get all ingredients",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/ingredients/categories",
+							"raw": "http://localhost:8080/api/v1/ingredients",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -276,21 +421,20 @@
 							"path": [
 								"api",
 								"v1",
-								"ingredients",
-								"categories"
+								"ingredients"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Update ingredient category",
+					"name": "Update ingredient",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Category 1.0\",\r\n    \"description\": \"Updated Category description\",\r\n    \"parentCategoryId\": null\r\n}",
+							"raw": "{\r\n    \"name\": \"Ingredient 1.0\",\r\n    \"description\": \"Ingredient description updated\",\r\n    \"categoryId\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -298,7 +442,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/ingredients/categories/1",
+							"raw": "http://localhost:8080/api/v1/ingredients/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -308,7 +452,6 @@
 								"api",
 								"v1",
 								"ingredients",
-								"categories",
 								"1"
 							]
 						}
@@ -316,21 +459,12 @@
 					"response": []
 				},
 				{
-					"name": "Delete ingredient category",
+					"name": "Delete ingredient",
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Category 1\",\r\n    \"description\": \"Category description\",\r\n    \"parentCategoryId\": null\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/ingredients/categories/1",
+							"raw": "http://localhost:8080/api/v1/ingredients/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -340,7 +474,6 @@
 								"api",
 								"v1",
 								"ingredients",
-								"categories",
 								"1"
 							]
 						}
@@ -349,27 +482,6 @@
 				}
 			],
 			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "Get all ingredients",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/v1/ingredients",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"v1",
-						"ingredients"
-					]
-				}
-			},
-			"response": []
 		}
 	],
 	"auth": {
