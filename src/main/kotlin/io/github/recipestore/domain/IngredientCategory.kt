@@ -34,5 +34,11 @@ data class IngredientCategory(
     var modified: LocalDateTime = LocalDateTime.now(),
 
     @Transient
-    var childCategories: List<IngredientCategory> = mutableListOf()
+    var childCategories: List<IngredientCategory> = mutableListOf(),
+
+    @Transient
+    var ingredients: List<Ingredient> = mutableListOf(),
+
+    @Transient
+    var user: User? = null,
     )
