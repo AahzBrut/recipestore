@@ -6,7 +6,7 @@
 
 
     <changeSet id="UOM-001" author="Aahz Brut">
-        <createSequence schemaName="REPOSITORY" sequenceName="UOM_SEQ" startValue="0"/>
+        <createSequence schemaName="REPOSITORY" sequenceName="UOM_SEQ"/>
     </changeSet>
 
     <changeSet id="UOM-002" author="Aahz Brut">
