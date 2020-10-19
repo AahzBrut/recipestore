@@ -55,7 +55,7 @@ class IngredientController(
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(INGREDIENTS_BY_ID_PATH,
         produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun deleteIngredientCategory(principal: Principal, @PathVariable id: Long): Mono<Void> =
+    fun deleteIngredient(principal: Principal, @PathVariable id: Long): Mono<Void> =
         service
             .deleteIngredient(id)
 }
