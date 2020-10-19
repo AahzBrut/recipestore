@@ -1,42 +1,44 @@
 package io.github.recipestore.service
 
 import io.github.recipestore.domain.IngredientCategory
+import io.github.recipestore.domain.RecipeCategory
 import io.github.recipestore.dto.request.CategoryRequest
-import io.github.recipestore.repository.IngredientCategoryRepository
-import io.github.recipestore.repository.IngredientRepository
+import io.github.recipestore.repository.RecipeCategoryRepository
+import io.github.recipestore.repository.RecipeRepository
 import io.github.recipestore.repository.UserRepository
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
+
 @Service
-class IngredientCategoryService(
-    private val repository: IngredientCategoryRepository,
-    private val userRepository: UserRepository,
-    private val ingredientRepository: IngredientRepository
+class RecipeCategoryService(
+    private val repository: RecipeCategoryRepository,
+    private val recipeRepository: RecipeRepository,
+    private val userRepository: UserRepository
 ) {
 
-    fun getAllCategories(): Flux<IngredientCategory> = getChildCategories(null)
+    fun getAllCategories(): Flux<RecipeCategory> = getChildCategories(null)
 
-    fun getChildCategories(parentId: Long?): Flux<IngredientCategory> = repository
+    fun getChildCategories(parentId: Long?): Flux<RecipeCategory> = repository
         .findAllByParentCategoryId(parentId)
         .flatMap(::mapCategoryProperties)
 
-    fun getCategory(id: Long): Mono<IngredientCategory> =
+    fun getCategory(id: Long): Mono<RecipeCategory> =
         repository.findById(id)
             .flatMap(::mapCategoryProperties)
 
-    fun addCategory(userName: String, request: CategoryRequest): Mono<IngredientCategory> =
+    fun addCategory(userName: String, request: CategoryRequest): Mono<RecipeCategory> =
         userRepository
             .findByName(userName)
             .flatMap { user ->
                 repository
                     .save(
-                        IngredientCategory(name = request.name, description = request.description, parentCategoryId = request.parentCategoryId, userId = user.id!!)
+                        RecipeCategory(name = request.name, description = request.description, parentCategoryId = request.parentCategoryId, userId = user.id!!)
                     )
             }
 
-    fun updateCategory(id: Long, userName: String, request: CategoryRequest): Mono<IngredientCategory> =
+    fun updateCategory(id: Long, userName: String, request: CategoryRequest): Mono<RecipeCategory> =
         userRepository
             .findByName(userName)
             .flatMap { user ->
@@ -49,11 +51,11 @@ class IngredientCategoryService(
 
     fun deleteCategory(id: Long): Mono<Void> = repository.deleteById(id)
 
-    private fun mapCategoryProperties(category: IngredientCategory): Mono<IngredientCategory> =
+    private fun mapCategoryProperties(category: RecipeCategory): Mono<RecipeCategory> =
         Mono.just(category)
-            .zipWith(ingredientRepository.findAllByCategoryId(category.id!!).collectList())
+            .zipWith(recipeRepository.findAllByCategoryId(category.id!!).collectList())
             .map { tuple ->
-                tuple.t1.ingredients = tuple.t2
+                tuple.t1.recipes = tuple.t2
                 tuple.t1
             }
             .zipWith(repository.findAllByParentCategoryId(category.id!!).collectList())

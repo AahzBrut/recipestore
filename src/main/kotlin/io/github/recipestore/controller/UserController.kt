@@ -33,21 +33,17 @@ class UserController(
 ) {
 
     @PostMapping(USER_LOGIN_PATH)
-    fun login(@RequestBody request: LoginRequest): Mono<ResponseEntity<String>> {
-
-        return userService
-            .login(request)
-            .map { ResponseEntity.ok(it) }
-            .defaultIfEmpty(ResponseEntity.status(UNAUTHORIZED).build())
-    }
+    fun login(@RequestBody request: LoginRequest): Mono<ResponseEntity<String>> =
+        userService
+        .login(request)
+        .map { ResponseEntity.ok(it) }
+        .defaultIfEmpty(ResponseEntity.status(UNAUTHORIZED).build())
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(USERS_PATH,
         produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun getAllUsers(principal: Principal) : Flux<User> {
-
-        return userService.getAllUsers()
-    }
+    fun getAllUsers(principal: Principal) : Flux<User> =
+        userService.getAllUsers()
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping(USER_SIGNON_PATH,
