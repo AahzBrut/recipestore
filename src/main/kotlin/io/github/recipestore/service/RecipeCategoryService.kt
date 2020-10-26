@@ -1,6 +1,5 @@
 package io.github.recipestore.service
 
-import io.github.recipestore.domain.IngredientCategory
 import io.github.recipestore.domain.RecipeCategory
 import io.github.recipestore.dto.request.CategoryRequest
 import io.github.recipestore.repository.RecipeCategoryRepository

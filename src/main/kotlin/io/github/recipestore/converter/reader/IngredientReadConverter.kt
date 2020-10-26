@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
 @Service
-class IngredientReaderConverter : Converter<Row, Ingredient> {
+class IngredientReadConverter : Converter<Row, Ingredient> {
 
     override fun convert(source: Row): Ingredient = Ingredient(
         (source["INGREDIENT_ID"] as Int).toLong(),

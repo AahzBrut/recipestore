@@ -38,13 +38,13 @@ dependencies {
 
     implementation("org.liquibase:liquibase-core")
     implementation("com.h2database:h2")
+    implementation("io.r2dbc:r2dbc-h2")
 
     implementation("io.jsonwebtoken:jjwt-api:${jwtVersion}")
     runtimeOnly("io.jsonwebtoken:jjwt-impl:${jwtVersion}")
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:${jwtVersion}")
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
-    runtimeOnly("io.r2dbc:r2dbc-h2")
 
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
