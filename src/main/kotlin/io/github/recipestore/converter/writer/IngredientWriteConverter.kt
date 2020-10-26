@@ -8,7 +8,7 @@ import org.springframework.data.relational.core.sql.SqlIdentifier
 import org.springframework.stereotype.Service
 
 @Service
-class IngredientWriterConverter : Converter<Ingredient, OutboundRow> {
+class IngredientWriteConverter : Converter<Ingredient, OutboundRow> {
 
     override fun convert(source: Ingredient): OutboundRow {
         val result = OutboundRow()

@@ -4,23 +4,24 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
+
     <changeSet id="RECIPE-001" author="Aahz Brut">
         <createSequence schemaName="REPOSITORY" sequenceName="RECIPE_SEQ"/>
     </changeSet>
 
     <changeSet id="RECIPE-002" author="Aahz Brut">
         <createTable schemaName="REPOSITORY" tableName="RECIPE">
-            <column name="RECIPE_ID" type="INT" defaultValueSequenceNext="RECIPE_SEQ">
+            <column name="RECIPE_ID" type="INT" defaultValueSequenceNext="REPOSITORY.RECIPE_SEQ">
                 <constraints primaryKey="true" primaryKeyName="RECIPE_PK"/>
             </column>
             <column name="NAME" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="DESCRIPTION" type="CLOB"/>
+            <column name="DESCRIPTION" type="VARCHAR(8192)"/>
             <column name="DIFFICULTY" type="VARCHAR(32)"/>
             <column name="SERVINGS" type="INT"/>
             <column name="SOURCE" type="VARCHAR(255)"/>
-            <column name="URL" type="CLOB"/>
+            <column name="URL" type="VARCHAR(8192)"/>
             <column name="RECIPE_CATEGORY_ID" type="INT">
                 <constraints nullable="false"/>
             </column>
