@@ -7,12 +7,12 @@ Kotlin Spring WebFlux reference project
 # Usage
 
 ## Login (/api/v1/login)
-Admin privileges:
-user name: admin
-password: 123
+Admin privileges:</br>
+user name: admin</br>
+password: 123</br>
 
-User privileges:
-user name: user
-password: 123
+User privileges:</br>
+user name: user</br>
+password: 123</br>
 
 returns jwt token in response body, this token must be provided in auth header when calling other endpoints (see example Postman scripts).
