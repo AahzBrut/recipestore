@@ -4,9 +4,9 @@
 Kotlin Spring WebFlux reference project
 
 
-#Usage
+# Usage
 
-##Login (/api/v1/login)
+## Login (/api/v1/login)
 Admin privileges:
 user name: admin
 password: 123
