@@ -16,3 +16,8 @@ user name: user</br>
 password: 123</br>
 
 returns jwt token in response body, this token must be provided in auth header when calling other endpoints (see example Postman scripts).
+
+## DB Console http://localhost:8082/
+url: jdbc:h2:file:~/recipestore/db</br>
+user: sa</br>
+password:</br>
