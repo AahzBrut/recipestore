@@ -10,13 +10,13 @@
 
     <changeSet id="RECIPE_STEP-002" author="Aahz Brut">
         <createTable schemaName="REPOSITORY" tableName="RECIPE_STEP">
-            <column name="RECIPE_STEP_ID" type="INT" defaultValueSequenceNext="RECIPE_STEP_SEQ">
+            <column name="RECIPE_STEP_ID" type="INT" defaultValueSequenceNext="REPOSITORY.RECIPE_STEP_SEQ">
                 <constraints primaryKey="true" primaryKeyName="RECIPE_STEP_PK"/>
             </column>
             <column name="NAME" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="DESCRIPTION" type="CLOB"/>
+            <column name="DESCRIPTION" type="VARCHAR(8192)"/>
             <column name="ORDINAL" type="INT">
                 <constraints nullable="false"/>
             </column>

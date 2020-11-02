@@ -822,6 +822,273 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "RecipeSteps",
+			"item": [
+				{
+					"name": "Add recipe step",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"recipe step\",\r\n    \"description\": \"recipe step descriptions\",\r\n    \"ordinal\": 1,\r\n    \"ingredients\": [\r\n        {\r\n            \"name\": \"\",\r\n            \"description\": \"\",\r\n            \"uomId\": 1,\r\n            \"uomAmount\": 1,\r\n            \"ingredientId\": 1\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/recipes/1/steps",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"recipes",
+								"1",
+								"steps"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get recipe step",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/recipes/steps/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"recipes",
+								"steps",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all recipe steps",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/recipes/1/steps",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"recipes",
+								"1",
+								"steps"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update recipe step",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"recipe step updated\",\r\n    \"description\": \"recipe step descriptions updated\",\r\n    \"ordinal\": 2,\r\n    \"ingredients\": [\r\n        {\r\n            \"name\": \"\",\r\n            \"description\": \"\",\r\n            \"uomId\": 1,\r\n            \"uomAmount\": 1,\r\n            \"ingredientId\": 1\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/recipes/steps/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"recipes",
+								"steps",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete recipe step",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/recipes/steps/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"recipes",
+								"steps",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Init scripts",
+			"item": [
+				{
+					"name": "Add ingredient category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Category 1\",\r\n    \"description\": \"Category description\",\r\n    \"parentCategoryId\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ingredients/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ingredients",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add ingredient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Ingredient 1\",\r\n    \"description\": \"Ingredient description\",\r\n    \"categoryId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ingredients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ingredients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add recipe category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Category 1\",\r\n    \"description\": \"Category description\",\r\n    \"parentCategoryId\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/recipes/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"recipes",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add recipe",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Recipe 1\",\r\n    \"description\": \"Description of recipe 1\",\r\n    \"difficulty\": \"MEDIUM\",\r\n    \"numServings\": 4,\r\n    \"source\": \"some book\",\r\n    \"url\": \"https://some.book.com\",\r\n    \"categoryId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/recipes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"recipes"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"auth": {
