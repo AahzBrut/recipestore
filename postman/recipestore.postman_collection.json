@@ -1086,6 +1086,38 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Add recipe step",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"recipe step\",\r\n    \"description\": \"recipe step descriptions\",\r\n    \"ordinal\": 1,\r\n    \"ingredients\": [\r\n        {\r\n            \"name\": \"\",\r\n            \"description\": \"\",\r\n            \"uomId\": 1,\r\n            \"uomAmount\": 1,\r\n            \"ingredientId\": 1\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/recipes/1/steps",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"recipes",
+								"1",
+								"steps"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
