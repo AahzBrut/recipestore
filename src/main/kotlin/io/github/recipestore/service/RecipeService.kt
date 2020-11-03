@@ -12,7 +12,8 @@ import reactor.core.publisher.Mono
 @Service
 class RecipeService(
     private val repository: RecipeRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val recipeStepService: RecipeStepService
 ) {
 
     fun getAllRecipes(): Flux<Recipe> =
@@ -26,6 +27,14 @@ class RecipeService(
                         it.t1
                     }
             }
+            .flatMap { recipe ->
+                Mono.just(recipe)
+                    .zipWith(recipeStepService.getAllRecipeSteps(recipe.id!!).collectList())
+                    .map {
+                        it.t1.steps = it.t2
+                        it.t1
+                    }
+            }
 
     fun getRecipe(id: Long): Mono<Recipe> =
         repository
@@ -36,6 +45,13 @@ class RecipeService(
                     .zipWith(userRepository.findById(recipe.userId))
                     .map {
                         it.t1.user = it.t2
+                        it.t1
+                    }}
+            .flatMap { recipe ->
+                Mono.just(recipe)
+                    .zipWith(recipeStepService.getAllRecipeSteps(id).collectList())
+                    .map {
+                        it.t1.steps = it.t2
                         it.t1
                     }
             }

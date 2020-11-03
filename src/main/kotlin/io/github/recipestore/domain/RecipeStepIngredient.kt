@@ -2,6 +2,7 @@ package io.github.recipestore.domain
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import org.springframework.data.annotation.Id
+import org.springframework.data.annotation.Transient
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
@@ -46,9 +47,12 @@ data class RecipeStepIngredient(
     var modified: LocalDateTime = LocalDateTime.now(),
 ) {
 
+    @Transient
     var uom: UOM? = null
 
+    @Transient
     var ingredient: Ingredient? = null
 
+    @Transient
     var user: User? = null
 }

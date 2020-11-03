@@ -45,10 +45,14 @@ data class Recipe(
 
     @Column("MODIFIED")
     var modified: LocalDateTime = LocalDateTime.now(),
+    ) {
 
     @Transient
-    var user: User? = null,
+    var user: User? = null
 
     @Transient
-    var category: RecipeCategory? = null,
-    )
+    var category: RecipeCategory? = null
+
+    @Transient
+    var steps: List<RecipeStep> = mutableListOf()
+}
