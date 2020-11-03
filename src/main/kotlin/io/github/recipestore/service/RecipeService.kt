@@ -17,9 +17,28 @@ class RecipeService(
 
     fun getAllRecipes(): Flux<Recipe> =
         repository.findAll()
+            .flatMap { recipe ->
+                Mono
+                    .just(recipe)
+                    .zipWith(userRepository.findById(recipe.userId))
+                    .map {
+                        it.t1.user = it.t2
+                        it.t1
+                    }
+            }
 
     fun getRecipe(id: Long): Mono<Recipe> =
-        repository.findById(id)
+        repository
+            .findById(id)
+            .flatMap { recipe ->
+                Mono
+                    .just(recipe)
+                    .zipWith(userRepository.findById(recipe.userId))
+                    .map {
+                        it.t1.user = it.t2
+                        it.t1
+                    }
+            }
 
     fun addRecipe(userName: String, request: RecipeRequest): Mono<Recipe> =
         userRepository
