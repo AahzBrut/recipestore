@@ -22,9 +22,8 @@ class R2DbcConfig(
     @Value("\${spring.r2dbc.url}")
     private lateinit var dbUrl: String
 
-    override fun connectionFactory(): ConnectionFactory {
-        return ConnectionFactories.get(dbUrl)
-    }
+    override fun connectionFactory(): ConnectionFactory =
+        ConnectionFactories.get(dbUrl)
 
     @Bean
     fun initializer(@Qualifier("connectionFactory") connectionFactory: ConnectionFactory): ConnectionFactoryInitializer? {
