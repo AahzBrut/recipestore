@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono
 interface RecipeStepRepository: ReactiveCrudRepository<RecipeStep, Long> {
 
     @Modifying
-    @Query("UPDATE REPOSITORY.RECIPE_STEP SET " +
+    @Query("UPDATE RECIPE_STEP SET " +
         "NAME=:name, " +
         "DESCRIPTION=:description, " +
         "ORDINAL=:ordinal, " +

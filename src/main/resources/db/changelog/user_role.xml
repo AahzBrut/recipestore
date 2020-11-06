@@ -6,12 +6,12 @@
 
 
     <changeSet id="USER-ROLE-001" author="Aahz Brut">
-        <createSequence schemaName="REPOSITORY" sequenceName="USER_ROLE_SEQ"/>
+        <createSequence sequenceName="USER_ROLE_SEQ"/>
     </changeSet>
 
     <changeSet id="USER_ROLE-002" author="Aahz Brut">
-        <createTable schemaName="REPOSITORY" tableName="USER_ROLE">
-            <column name="USER_ROLE_ID" type="INT" defaultValueSequenceNext="REPOSITORY.USER_ROLE_SEQ">
+        <createTable tableName="USER_ROLE">
+            <column name="USER_ROLE_ID" type="INT" defaultValueSequenceNext="USER_ROLE_SEQ">
                 <constraints primaryKey="true" primaryKeyName="USER_ROLE_PK"/>
             </column>
             <column name="USER_ID" type="INT">

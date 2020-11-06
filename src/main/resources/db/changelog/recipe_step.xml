@@ -5,12 +5,12 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet id="RECIPE_STEP-001" author="Aahz Brut">
-        <createSequence schemaName="REPOSITORY" sequenceName="RECIPE_STEP_SEQ"/>
+        <createSequence sequenceName="RECIPE_STEP_SEQ"/>
     </changeSet>
 
     <changeSet id="RECIPE_STEP-002" author="Aahz Brut">
-        <createTable schemaName="REPOSITORY" tableName="RECIPE_STEP">
-            <column name="RECIPE_STEP_ID" type="INT" defaultValueSequenceNext="REPOSITORY.RECIPE_STEP_SEQ">
+        <createTable tableName="RECIPE_STEP">
+            <column name="RECIPE_STEP_ID" type="INT" defaultValueSequenceNext="RECIPE_STEP_SEQ">
                 <constraints primaryKey="true" primaryKeyName="RECIPE_STEP_PK"/>
             </column>
             <column name="NAME" type="VARCHAR(255)">

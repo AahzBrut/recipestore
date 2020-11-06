@@ -10,8 +10,8 @@
     </changeSet>
 
     <changeSet id="RECIPE-002" author="Aahz Brut">
-        <createTable schemaName="REPOSITORY" tableName="RECIPE">
-            <column name="RECIPE_ID" type="INT" defaultValueSequenceNext="REPOSITORY.RECIPE_SEQ">
+        <createTable tableName="RECIPE">
+            <column name="RECIPE_ID" type="INT" defaultValueSequenceNext="RECIPE_SEQ">
                 <constraints primaryKey="true" primaryKeyName="RECIPE_PK"/>
             </column>
             <column name="NAME" type="VARCHAR(255)">

@@ -6,12 +6,12 @@
 
 
     <changeSet id="USER-001" author="Aahz Brut">
-        <createSequence schemaName="REPOSITORY" sequenceName="USER_SEQ"/>
+        <createSequence sequenceName="USER_SEQ"/>
     </changeSet>
 
     <changeSet id="USER-002" author="Aahz Brut">
-        <createTable schemaName="REPOSITORY" tableName="USER">
-            <column name="USER_ID" type="INT" defaultValueSequenceNext="REPOSITORY.USER_SEQ">
+        <createTable tableName="USER">
+            <column name="USER_ID" type="INT" defaultValueSequenceNext="USER_SEQ">
                 <constraints primaryKey="true" primaryKeyName="USER_PK"/>
             </column>
             <column name="NAME" type="VARCHAR(255)">

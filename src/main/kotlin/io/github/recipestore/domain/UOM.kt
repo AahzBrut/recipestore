@@ -5,7 +5,7 @@ import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
 
 
-@Table("REPOSITORY.UOM")
+@Table("UOM")
 data class UOM(
     @Id
     @Column("UOM_ID")

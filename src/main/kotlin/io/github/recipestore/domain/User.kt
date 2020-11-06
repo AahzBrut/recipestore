@@ -7,7 +7,7 @@ import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
 
-@Table("REPOSITORY.USER")
+@Table("USER")
 data class User(
     @Id
     @Column("USER_ID")

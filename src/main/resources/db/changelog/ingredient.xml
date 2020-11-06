@@ -6,11 +6,11 @@
 
 
     <changeSet id="INGREDIENT-001" author="Aahz Brut">
-        <createSequence schemaName="REPOSITORY" sequenceName="INGREDIENT_SEQ"/>
+        <createSequence sequenceName="INGREDIENT_SEQ"/>
     </changeSet>
 
     <changeSet id="INGREDIENT-002" author="Aahz Brut">
-        <createTable schemaName="REPOSITORY" tableName="INGREDIENT">
+        <createTable tableName="INGREDIENT">
             <column name="INGREDIENT_ID" type="INT" defaultValueSequenceNext="REPOSITORY.INGREDIENT_SEQ">
                 <constraints primaryKey="true" primaryKeyName="INGREDIENT_PK"/>
             </column>

@@ -8,31 +8,21 @@
     <changeSet id="USER_ROLE-003" author="Aahz Brut">
         <addForeignKeyConstraint baseColumnNames="USER_ID" baseTableName="USER_ROLE"
                                  constraintName="FK-USER_ROLE-USER"
-                                 baseTableSchemaName="REPOSITORY"
-                                 referencedTableSchemaName="REPOSITORY"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="USER_ID" referencedTableName="USER"/>
         <addForeignKeyConstraint baseColumnNames="ROLE_ID" baseTableName="USER_ROLE"
-                                 baseTableSchemaName="REPOSITORY"
-                                 referencedTableSchemaName="REPOSITORY"
                                  constraintName="FK-USER_ROLE-ROLE"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="ROLE_ID" referencedTableName="ROLE"/>
         <addForeignKeyConstraint baseColumnNames="RECIPE_CATEGORY_ID" baseTableName="RECIPE"
-                                 baseTableSchemaName="REPOSITORY"
-                                 referencedTableSchemaName="REPOSITORY"
                                  constraintName="FK-RECIPE-RECIPE_CATEGORY"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="RECIPE_CATEGORY_ID" referencedTableName="RECIPE_CATEGORY"/>
         <addForeignKeyConstraint baseColumnNames="USER_ID" baseTableName="RECIPE"
-                                 baseTableSchemaName="REPOSITORY"
-                                 referencedTableSchemaName="REPOSITORY"
                                  constraintName="FK-RECIPE-USER"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="USER_ID" referencedTableName="USER"/>
         <addForeignKeyConstraint baseColumnNames="PARENT_CATEGORY_ID" baseTableName="RECIPE_CATEGORY"
-                                 baseTableSchemaName="REPOSITORY"
-                                 referencedTableSchemaName="REPOSITORY"
                                  constraintName="FK-RECIPE_CATEGORY-RECIPE_CATEGORY"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="RECIPE_CATEGORY_ID" referencedTableName="RECIPE_CATEGORY"/>

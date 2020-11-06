@@ -12,7 +12,7 @@ interface RecipeRepository : ReactiveCrudRepository<Recipe, Long> {
     fun findAllByCategoryId(categoryId: Long): Flux<Recipe>
 
     @Modifying
-    @Query("UPDATE REPOSITORY.RECIPE SET " +
+    @Query("UPDATE RECIPE SET " +
         "NAME=:name, " +
         "DESCRIPTION=:description, " +
         "DIFFICULTY=:difficulty, " +

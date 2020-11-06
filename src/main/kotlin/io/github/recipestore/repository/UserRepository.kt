@@ -11,6 +11,6 @@ interface UserRepository: ReactiveCrudRepository<User, Long> {
     fun findByName(name: String): Mono<User>
 
     @Modifying
-    @Query("UPDATE REPOSITORY.USER SET NAME=:name, PASSWORD=:password, MODIFIED=CURRENT_TIMESTAMP() WHERE USER_ID=:id")
+    @Query("UPDATE USER SET NAME=:name, PASSWORD=:password, MODIFIED=CURRENT_TIMESTAMP() WHERE USER_ID=:id")
     fun updateUser(id: Long, name: String, password: String): Mono<Int>
 }

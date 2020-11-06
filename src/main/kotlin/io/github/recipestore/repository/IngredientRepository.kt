@@ -12,7 +12,7 @@ interface IngredientRepository : ReactiveCrudRepository<Ingredient, Long> {
     fun findAllByCategoryId(categoryId: Long): Flux<Ingredient>
 
     @Modifying
-    @Query("UPDATE REPOSITORY.INGREDIENT SET NAME=:name, DESCRIPTION=:description, INGREDIENT_CATEGORY_ID=:categoryId, USER_ID=:userId, MODIFIED=CURRENT_TIMESTAMP() WHERE INGREDIENT_ID=:id")
+    @Query("UPDATE INGREDIENT SET NAME=:name, DESCRIPTION=:description, INGREDIENT_CATEGORY_ID=:categoryId, USER_ID=:userId, MODIFIED=CURRENT_TIMESTAMP() WHERE INGREDIENT_ID=:id")
     fun updateIngredient(id: Long, name: String, description: String, categoryId: Long, userId: Long): Mono<Int>
 
 }

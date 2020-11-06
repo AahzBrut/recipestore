@@ -8,57 +8,57 @@
     <changeSet id="default-data-001" author="Aahz Brut">
 
 <!-- ROLES -->
-        <insert schemaName="REPOSITORY" tableName="ROLE">
+        <insert tableName="ROLE">
             <column name="NAME" value="ADMIN"/>
             <column name="DESCRIPTION" value="Admin role"/>
         </insert>
-        <insert schemaName="REPOSITORY" tableName="ROLE">
+        <insert tableName="ROLE">
             <column name="NAME" value="USER"/>
             <column name="DESCRIPTION" value="User role"/>
         </insert>
-        <insert schemaName="REPOSITORY" tableName="ROLE">
+        <insert tableName="ROLE">
             <column name="NAME" value="TESTER"/>
             <column name="DESCRIPTION" value="Tester role"/>
         </insert>
 
 <!-- USERS -->
-        <insert schemaName="REPOSITORY" tableName="USER">
+        <insert tableName="USER">
             <column name="NAME" value="user"/>
             <column name="PASSWORD" value="$2a$10$mKUeTOuYiBBVKsAgAHIxl.vcmHhox13HXy7euRUnZjw3uQEI8ipze"/>
         </insert>
-        <insert schemaName="REPOSITORY" tableName="USER">
+        <insert tableName="USER">
             <column name="NAME" value="admin"/>
             <column name="PASSWORD" value="$2a$10$mKUeTOuYiBBVKsAgAHIxl.vcmHhox13HXy7euRUnZjw3uQEI8ipze"/>
         </insert>
 
 <!-- USER ROLES -->
-        <insert schemaName="REPOSITORY" tableName="USER_ROLE">
+        <insert tableName="USER_ROLE">
             <column name="USER_ID" valueComputed="SELECT USER_ID FROM REPOSITORY.USER WHERE NAME='user'"/>
             <column name="ROLE_ID" valueComputed="SELECT ROLE_ID FROM REPOSITORY.ROLE WHERE NAME='USER'"/>
         </insert>
-        <insert schemaName="REPOSITORY" tableName="USER_ROLE">
+        <insert tableName="USER_ROLE">
             <column name="USER_ID" valueComputed="SELECT USER_ID FROM REPOSITORY.USER WHERE NAME='admin'"/>
             <column name="ROLE_ID" valueComputed="SELECT ROLE_ID FROM REPOSITORY.ROLE WHERE NAME='USER'"/>
         </insert>
-        <insert schemaName="REPOSITORY" tableName="USER_ROLE">
+        <insert tableName="USER_ROLE">
             <column name="USER_ID" valueComputed="SELECT USER_ID FROM REPOSITORY.USER WHERE NAME='admin'"/>
             <column name="ROLE_ID" valueComputed="SELECT ROLE_ID FROM REPOSITORY.ROLE WHERE NAME='ADMIN'"/>
         </insert>
 
 <!-- Unit of measurement -->
-        <insert schemaName="REPOSITORY" tableName="UOM">
+        <insert tableName="UOM">
             <column name="NAME" value="kg"/>
             <column name="DESCRIPTION" value="kilogram"/>
         </insert>
-        <insert schemaName="REPOSITORY" tableName="UOM">
+        <insert tableName="UOM">
             <column name="NAME" value="g"/>
             <column name="DESCRIPTION" value="gram"/>
         </insert>
-        <insert schemaName="REPOSITORY" tableName="UOM">
+        <insert tableName="UOM">
             <column name="NAME" value="lt"/>
             <column name="DESCRIPTION" value="liter"/>
         </insert>
-        <insert schemaName="REPOSITORY" tableName="UOM">
+        <insert tableName="UOM">
             <column name="NAME" value="ml"/>
             <column name="DESCRIPTION" value="milliliter"/>
         </insert>

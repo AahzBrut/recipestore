@@ -6,12 +6,12 @@
 
 
     <changeSet id="RECIPE_STEP_INGREDIENT-001" author="Aahz Brut">
-        <createSequence schemaName="REPOSITORY" sequenceName="RECIPE_STEP_INGREDIENT_SEQ"/>
+        <createSequence sequenceName="RECIPE_STEP_INGREDIENT_SEQ"/>
     </changeSet>
 
     <changeSet id="RECIPE_STEP_INGREDIENT-002" author="Aahz Brut">
-        <createTable schemaName="REPOSITORY" tableName="RECIPE_STEP_INGREDIENT">
-            <column name="RECIPE_STEP_INGREDIENT_ID" type="INT" defaultValueSequenceNext="REPOSITORY.RECIPE_STEP_INGREDIENT_SEQ">
+        <createTable tableName="RECIPE_STEP_INGREDIENT">
+            <column name="RECIPE_STEP_INGREDIENT_ID" type="INT" defaultValueSequenceNext="RECIPE_STEP_INGREDIENT_SEQ">
                 <constraints primaryKey="true" primaryKeyName="RECIPE_STEP_INGREDIENT_PK"/>
             </column>
             <column name="NAME" type="VARCHAR(255)">

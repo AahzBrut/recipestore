@@ -12,6 +12,6 @@ interface IngredientCategoryRepository : ReactiveCrudRepository<IngredientCatego
     fun findAllByParentCategoryId(parentId: Long?): Flux<IngredientCategory>
 
     @Modifying
-    @Query("UPDATE REPOSITORY.INGREDIENT_CATEGORY SET NAME=:name, DESCRIPTION=:description, PARENT_CATEGORY_ID=:parentId, USER_ID=:userId, MODIFIED=CURRENT_TIMESTAMP() WHERE INGREDIENT_CATEGORY_ID=:id")
+    @Query("UPDATE INGREDIENT_CATEGORY SET NAME=:name, DESCRIPTION=:description, PARENT_CATEGORY_ID=:parentId, USER_ID=:userId, MODIFIED=CURRENT_TIMESTAMP() WHERE INGREDIENT_CATEGORY_ID=:id")
     fun updateCategory(id: Long, name: String, description: String, parentId: Long?, userId: Long): Mono<Int>
 }

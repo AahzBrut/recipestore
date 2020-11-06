@@ -6,12 +6,12 @@
 
 
     <changeSet id="ROLE-001" author="Aahz Brut">
-        <createSequence schemaName="REPOSITORY" sequenceName="ROLE_SEQ" startValue="0"/>
+        <createSequence sequenceName="ROLE_SEQ" startValue="0"/>
     </changeSet>
 
     <changeSet id="ROLE-002" author="Aahz Brut">
-        <createTable schemaName="REPOSITORY" tableName="ROLE">
-            <column name="ROLE_ID" type="INT" defaultValueSequenceNext="REPOSITORY.ROLE_SEQ">
+        <createTable tableName="ROLE">
+            <column name="ROLE_ID" type="INT" defaultValueSequenceNext="ROLE_SEQ">
                 <constraints primaryKey="true" primaryKeyName="ROLE_PK"/>
             </column>
             <column name="NAME" type="VARCHAR(255)">
