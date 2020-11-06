@@ -11,7 +11,9 @@ import org.springframework.core.io.ClassPathResource
 import org.springframework.data.r2dbc.config.AbstractR2dbcConfiguration
 import org.springframework.data.r2dbc.connectionfactory.init.CompositeDatabasePopulator
 import org.springframework.data.r2dbc.connectionfactory.init.ConnectionFactoryInitializer
+import org.springframework.data.r2dbc.connectionfactory.init.DatabasePopulator
 import org.springframework.data.r2dbc.connectionfactory.init.ResourceDatabasePopulator
+import reactor.core.publisher.Mono
 
 
 @Configuration

@@ -8,7 +8,7 @@ import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
 
 
-@Table("RECIPE_CATEGORY")
+@Table("REPOSITORY.RECIPE_CATEGORY")
 data class RecipeCategory(
     @Id
     @Column("RECIPE_CATEGORY_ID")
