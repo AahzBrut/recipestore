@@ -528,6 +528,44 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Set ingredient's image",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Projects/DarkMatter/assets/graphics/textures-2.png"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ingredients/1/image",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ingredients",
+								"1",
+								"image"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -742,7 +780,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/recipes/2",
+							"raw": "http://localhost:8080/api/v1/recipes/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -752,7 +790,7 @@
 								"api",
 								"v1",
 								"recipes",
-								"2"
+								"1"
 							]
 						}
 					},
