@@ -9,6 +9,11 @@
       "name": "jwt.expiration",
       "type": "java.lang.String",
       "description": "Number of seconds till token will expire."
+    },
+    {
+      "name": "db-initializer-url",
+      "type": "java.lang.String",
+      "description": "Description for db-initializer-url."
     }
   ]
 }

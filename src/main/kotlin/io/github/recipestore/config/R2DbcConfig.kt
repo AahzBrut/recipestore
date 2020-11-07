@@ -24,15 +24,18 @@ class R2DbcConfig(
     @Value("\${spring.r2dbc.url}")
     private lateinit var dbUrl: String
 
+    @Value("\${db-initializer-url}")
+    private lateinit var initUrl: String
+
     override fun connectionFactory(): ConnectionFactory =
         ConnectionFactories.get(dbUrl)
 
     @Bean
-    fun initializer(@Qualifier("connectionFactory") connectionFactory: ConnectionFactory): ConnectionFactoryInitializer? {
+    fun initializer(): ConnectionFactoryInitializer {
 
         return ConnectionFactoryInitializer()
             .also {
-                it.setConnectionFactory(connectionFactory)
+                it.setConnectionFactory(ConnectionFactories.get(initUrl))
                 it.setDatabasePopulator(CompositeDatabasePopulator()
                     .also { populator ->
                         populator.addPopulators(ResourceDatabasePopulator(ClassPathResource("schema.sql")))
