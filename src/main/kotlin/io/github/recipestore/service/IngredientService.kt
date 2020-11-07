@@ -5,9 +5,21 @@ import io.github.recipestore.dto.request.IngredientRequest
 import io.github.recipestore.repository.IngredientCategoryRepository
 import io.github.recipestore.repository.IngredientRepository
 import io.github.recipestore.repository.UserRepository
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.core.io.buffer.DataBufferUtils
+import org.springframework.http.codec.multipart.FilePart
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
+import java.io.File
+import java.nio.channels.ByteChannel
+import java.nio.channels.Channels
+import java.nio.channels.FileChannel
+import java.nio.file.Files
+import java.nio.file.OpenOption
+import java.nio.file.Path
+import java.nio.file.Paths
+import java.nio.file.StandardOpenOption
 
 @Service
 class IngredientService(
@@ -15,6 +27,9 @@ class IngredientService(
     private val userRepository: UserRepository,
     private val ingredientCategoryRepository: IngredientCategoryRepository
 ) {
+
+    @Value("\${ingredients-images-path}")
+    private lateinit var imagesPath: String
 
     fun addIngredient(userName: String, request: IngredientRequest): Mono<Ingredient> =
         userRepository.findByName(userName)
@@ -76,4 +91,24 @@ class IngredientService(
             }
 
     fun deleteIngredient(id: Long): Mono<Void> = repository.deleteById(id)
+
+    fun setImage(id: Long, image: Mono<FilePart>): Mono<Void> =
+        image
+            .flatMap {filePart ->
+                DataBufferUtils
+                    .write(filePart.content().cache(), createFileAndGetChannel(Path.of("$imagesPath/$id.${getExtensionFromFileName(filePart.filename())}")))
+                    .map {dataBuffer ->
+                        DataBufferUtils.release(dataBuffer)
+                    }
+                Mono.empty()
+            }
+
+    private fun getExtensionFromFileName(fileName: String): String =
+        fileName.split(".")[1]
+
+    private fun createFileAndGetChannel(path: Path): ByteChannel {
+        if (!Files.exists(path.parent)) Files.createDirectories(path.parent)
+        if (!Files.exists(path)) Files.createFile(path)
+        return Files.newByteChannel(path, StandardOpenOption.READ, StandardOpenOption.WRITE)
+    }
 }
