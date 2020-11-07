@@ -14,6 +14,12 @@
       "name": "db-initializer-url",
       "type": "java.lang.String",
       "description": "Description for db-initializer-url."
+    },
+    {
+      "name": "ingredients-images-path",
+      "type": "java.lang.String",
+      "description": "Description for ingredients-images-path."
     }
+
   ]
 }
