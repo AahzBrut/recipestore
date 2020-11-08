@@ -6,6 +6,8 @@ import io.github.recipestore.repository.IngredientCategoryRepository
 import io.github.recipestore.repository.IngredientRepository
 import io.github.recipestore.repository.UserRepository
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.core.io.FileSystemResource
+import org.springframework.core.io.Resource
 import org.springframework.core.io.buffer.DataBufferUtils
 import org.springframework.http.codec.multipart.FilePart
 import org.springframework.stereotype.Service
@@ -111,4 +113,7 @@ class IngredientService(
         if (!Files.exists(path)) Files.createFile(path)
         return Files.newByteChannel(path, StandardOpenOption.READ, StandardOpenOption.WRITE)
     }
+
+    fun getImage(imageId: Long): Mono<Resource> =
+        Mono.just(FileSystemResource("$imagesPath/$imageId.png"))
 }
