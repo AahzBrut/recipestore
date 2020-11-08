@@ -3,6 +3,7 @@ package io.github.recipestore.controller
 import io.github.recipestore.domain.Ingredient
 import io.github.recipestore.dto.request.IngredientRequest
 import io.github.recipestore.service.IngredientService
+import org.springframework.core.io.Resource
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.codec.multipart.FilePart
@@ -66,4 +67,10 @@ class IngredientController(
         consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
     fun setImage(principal: Principal, @PathVariable id: Long, @RequestPart("image") image: Mono<FilePart>): Mono<Void> =
         service.setImage(id, image)
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(INGREDIENTS_IMAGE_PATH,
+        consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
+    fun getImage(principal: Principal, @PathVariable id: Long): Mono<Resource> =
+        service.getImage(id)
 }
