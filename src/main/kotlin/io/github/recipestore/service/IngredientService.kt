@@ -8,15 +8,11 @@ import io.github.recipestore.repository.UserRepository
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.core.io.FileSystemResource
 import org.springframework.core.io.Resource
-import org.springframework.core.io.buffer.DataBufferUtils
 import org.springframework.http.codec.multipart.FilePart
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
-import java.nio.channels.ByteChannel
-import java.nio.file.Files
 import java.nio.file.Path
-import java.nio.file.StandardOpenOption
 
 @Service
 class IngredientService(
@@ -91,23 +87,12 @@ class IngredientService(
 
     fun setImage(id: Long, image: Mono<FilePart>): Mono<Void> =
         image
-            .flatMap {filePart ->
-                DataBufferUtils
-                    .write(filePart.content().cache(), createFileAndGetChannel(Path.of("$imagesPath/$id.${getExtensionFromFileName(filePart.filename())}")))
-                    .map {dataBuffer ->
-                        DataBufferUtils.release(dataBuffer)
-                    }
-                Mono.empty()
+            .flatMap { filePart ->
+                filePart.transferTo(Path.of("$imagesPath/$id.${getExtensionFromFileName(filePart.filename())}"))
             }
 
     private fun getExtensionFromFileName(fileName: String): String =
         fileName.split(".")[1]
-
-    private fun createFileAndGetChannel(path: Path): ByteChannel {
-        if (!Files.exists(path.parent)) Files.createDirectories(path.parent)
-        if (!Files.exists(path)) Files.createFile(path)
-        return Files.newByteChannel(path, StandardOpenOption.READ, StandardOpenOption.WRITE)
-    }
 
     fun getImage(imageId: Long): Mono<Resource> =
         Mono.just(FileSystemResource("$imagesPath/$imageId.png"))
