@@ -31,7 +31,7 @@ class RecipeController(
     @PostMapping(RECIPES_PATH,
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun addRecipe(principal: Principal, @RequestBody request: RecipeRequest): Mono<Recipe> =
+    fun addRecipe(principal: Principal, @RequestBody request: RecipeRequest): Mono<Void> =
         service.addRecipe(principal.name, request)
 
     @ResponseStatus(HttpStatus.OK)
@@ -49,7 +49,7 @@ class RecipeController(
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(RECIPES_BY_ID_PATH,
         produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun updateRecipe(principal: Principal, @PathVariable id: Long, @RequestBody request: RecipeRequest): Mono<Recipe> =
+    fun updateRecipe(principal: Principal, @PathVariable id: Long, @RequestBody request: RecipeRequest): Mono<Void> =
         service.updateRecipe(id, principal.name, request)
 
     @ResponseStatus(HttpStatus.OK)

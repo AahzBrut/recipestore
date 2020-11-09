@@ -45,7 +45,7 @@ class UserService(
             userAddRolesMerger.merge(Mono.just(it), userRoleService.getUserRoles(it.id!!))
         }
 
-    fun addUser(request: LoginRequest): Mono<User> = Mono.just(request)
+    fun addUser(request: LoginRequest): Mono<Void> = Mono.just(request)
         .map { User(null, it.userName, encoder.encode(it.password)) }
         .flatMap(userRepository::save)
         .map {
@@ -53,7 +53,7 @@ class UserService(
                 userRoleService.addRolesToUser(it, setOf(Roles.USER))
             }
         }
-        .flatMap { getUser(it.id!!) }
+        .flatMap { Mono.empty() }
 
     fun addUserRoles(userId: Long, request: UserRolesAddRequest): Mono<User> = Mono.just(request)
         .flatMap {

@@ -16,7 +16,7 @@
             <column name="NAME" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="DESCRIPTION" type="VARCHAR(8192)"/>
+            <column name="DESCRIPTION" type="CLOB"/>
             <column name="ORDINAL" type="INT">
                 <constraints nullable="false"/>
             </column>

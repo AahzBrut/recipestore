@@ -37,7 +37,7 @@ class RecipeCategoryController(
     @PostMapping(RECIPE_CATEGORIES_PATH,
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun addRecipeCategory(principal: Principal, @RequestBody request: CategoryRequest): Mono<RecipeCategory> =
+    fun addRecipeCategory(principal: Principal, @RequestBody request: CategoryRequest): Mono<Void> =
         service
             .addCategory(principal.name, request)
 
@@ -52,7 +52,7 @@ class RecipeCategoryController(
     @PutMapping(RECIPE_CATEGORIES_BY_ID_PATH,
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun updateRecipeCategory(principal: Principal, @PathVariable id: Long, @RequestBody request: CategoryRequest): Mono<RecipeCategory> =
+    fun updateRecipeCategory(principal: Principal, @PathVariable id: Long, @RequestBody request: CategoryRequest): Mono<Void> =
         service
             .updateCategory(id, principal.name, request)
 

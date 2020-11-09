@@ -19,30 +19,20 @@ class RecipeStepService(
     private val ingredientRepository: IngredientRepository
 ) {
 
-    fun addRecipeStep(userName: String, recipeId: Long, request: RecipeStepAddRequest): Mono<RecipeStep> =
+    fun addRecipeStep(userName: String, recipeId: Long, request: RecipeStepAddRequest): Mono<Void> =
         userRepository
             .findByName(userName)
             .flatMap { user ->
                 repository
                     .save(RecipeStep(null, request.name, request.description, request.ordinal, recipeId, user.id!!))
-                    .flatMap { recipeStep ->
-                        Mono
-                            .just(recipeStep)
-                            .zipWith(stepIngredientRepository.saveAll(request.ingredients.map {
-                                RecipeStepIngredient(null, it.name, it.description, recipeStep.id!!, it.uomId, it.uomAmount, it.ingredientId, user.id!!)
-                            }).collectList())
-                            .map {
-                                it.t1.ingredients = it.t2
-                                it.t1.user = user
-                                it.t1
-                            }
-                    }
-
+            }
+            .flatMap {
+                Mono.empty()
             }
 
     fun getRecipeStep(recipeStepId: Long): Mono<RecipeStep> =
         repository.findById(recipeStepId)
-            .flatMap {step ->
+            .flatMap { step ->
                 Mono.just(step)
                     .zipWith(getStepIngredients(step.id!!).collectList())
                     .map {
@@ -58,7 +48,7 @@ class RecipeStepService(
     fun getAllRecipeSteps(recipeId: Long): Flux<RecipeStep> =
         repository
             .findAll()
-            .flatMap {step ->
+            .flatMap { step ->
                 Mono.just(step)
                     .zipWith(getStepIngredients(step.id!!).collectList())
                     .map {
@@ -68,7 +58,7 @@ class RecipeStepService(
                     }
             }
 
-    fun updateRecipeStep(userName: String, recipeStepId: Long, request: RecipeStepAddRequest): Mono<RecipeStep> =
+    fun updateRecipeStep(userName: String, recipeStepId: Long, request: RecipeStepAddRequest): Mono<Void> =
         userRepository
             .findByName(userName)
             .flatMap {
@@ -80,10 +70,10 @@ class RecipeStepService(
                         it.id!!)
             }
             .flatMap {
-                getRecipeStep(recipeStepId)
+                Mono.empty()
             }
 
-    private fun getStepIngredients(stepId: Long) : Flux<RecipeStepIngredient> =
+    private fun getStepIngredients(stepId: Long): Flux<RecipeStepIngredient> =
         stepIngredientRepository
             .findAllByRecipeStepId(stepId)
             .flatMap { stepIngredient ->

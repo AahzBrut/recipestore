@@ -34,7 +34,7 @@ class IngredientController(
     @PostMapping(INGREDIENTS_PATH,
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun addIngredient(principal: Principal, @RequestBody request: IngredientRequest): Mono<Ingredient> =
+    fun addIngredient(principal: Principal, @RequestBody request: IngredientRequest): Mono<Void> =
         service.addIngredient(principal.name, request)
 
     @ResponseStatus(HttpStatus.OK)
@@ -52,7 +52,7 @@ class IngredientController(
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(INGREDIENTS_BY_ID_PATH,
         produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun updateIngredient(principal: Principal, @PathVariable id: Long, @RequestBody request: IngredientRequest): Mono<Ingredient> =
+    fun updateIngredient(principal: Principal, @PathVariable id: Long, @RequestBody request: IngredientRequest): Mono<Void> =
         service.updateIngredient(principal.name, id, request)
 
     @ResponseStatus(HttpStatus.OK)

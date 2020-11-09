@@ -17,11 +17,11 @@
             <column name="NAME" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="DESCRIPTION" type="VARCHAR(8192)"/>
+            <column name="DESCRIPTION" type="CLOB"/>
             <column name="DIFFICULTY" type="VARCHAR(32)"/>
             <column name="SERVINGS" type="INT"/>
-            <column name="SOURCE" type="VARCHAR(255)"/>
-            <column name="URL" type="VARCHAR(8192)"/>
+            <column name="SOURCE" type="VARCHAR(1024)"/>
+            <column name="URL" type="CLOB"/>
             <column name="RECIPE_CATEGORY_ID" type="INT">
                 <constraints nullable="false"/>
             </column>

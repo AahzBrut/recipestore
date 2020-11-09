@@ -31,11 +31,12 @@ data class Ingredient(
     var created: LocalDateTime = LocalDateTime.now(),
 
     @Column("MODIFIED")
-    var modified: LocalDateTime = LocalDateTime.now(),
+    var modified: LocalDateTime = LocalDateTime.now()
+) {
 
     @Transient
-    var category: IngredientCategory? = null,
+    var category: IngredientCategory? = null
 
     @Transient
     var user: User? = null
-)
+}
