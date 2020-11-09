@@ -49,9 +49,10 @@ class UserController(
     @PostMapping(USER_SIGNON_PATH,
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun addUser(principal: Principal, @RequestBody request: LoginRequest) : Mono<User> =
+    fun addUser(principal: Principal, @RequestBody request: LoginRequest) : Mono<Void> =
         userService
             .addUser(request)
+
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(USER_ROLES_PATH,

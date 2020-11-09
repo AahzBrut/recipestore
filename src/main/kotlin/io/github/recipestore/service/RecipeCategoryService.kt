@@ -27,7 +27,7 @@ class RecipeCategoryService(
         repository.findById(id)
             .flatMap(::mapCategoryProperties)
 
-    fun addCategory(userName: String, request: CategoryRequest): Mono<RecipeCategory> =
+    fun addCategory(userName: String, request: CategoryRequest): Mono<Void> =
         userRepository
             .findByName(userName)
             .flatMap { user ->
@@ -35,17 +35,16 @@ class RecipeCategoryService(
                     .save(
                         RecipeCategory(name = request.name, description = request.description, parentCategoryId = request.parentCategoryId, userId = user.id!!)
                     )
+                Mono.empty()
             }
 
-    fun updateCategory(id: Long, userName: String, request: CategoryRequest): Mono<RecipeCategory> =
+    fun updateCategory(id: Long, userName: String, request: CategoryRequest): Mono<Void> =
         userRepository
             .findByName(userName)
             .flatMap { user ->
                 repository
                     .updateCategory(id, request.name, request.description, request.parentCategoryId, user.id!!)
-            }
-            .flatMap {
-                getCategory(id)
+                Mono.empty()
             }
 
     fun deleteCategory(id: Long): Mono<Void> = repository.deleteById(id)

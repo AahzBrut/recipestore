@@ -24,16 +24,14 @@ class IngredientService(
     @Value("\${ingredients-images-path}")
     private lateinit var imagesPath: String
 
-    fun addIngredient(userName: String, request: IngredientRequest): Mono<Ingredient> =
+    fun addIngredient(userName: String, request: IngredientRequest): Mono<Void> =
         userRepository.findByName(userName)
             .flatMap { user ->
                 repository
                     .save(
                         Ingredient(name = request.name, description = request.description, categoryId = request.categoryId, userId = user.id!!)
                     )
-            }
-            .flatMap {
-                getIngredient(it.id!!)
+                Mono.empty()
             }
 
     fun getAllIngredients(): Flux<Ingredient> =
@@ -74,13 +72,11 @@ class IngredientService(
                     }
             }
 
-    fun updateIngredient(userName: String, id: Long, request: IngredientRequest): Mono<Ingredient> =
+    fun updateIngredient(userName: String, id: Long, request: IngredientRequest): Mono<Void> =
         userRepository.findByName(userName)
             .flatMap {
                 repository.updateIngredient(id, request.name, request.description, request.categoryId, it.id!!)
-            }
-            .flatMap {
-                getIngredient(id)
+                Mono.empty()
             }
 
     fun deleteIngredient(id: Long): Mono<Void> = repository.deleteById(id)
