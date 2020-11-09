@@ -35,6 +35,8 @@ class RecipeCategoryService(
                     .save(
                         RecipeCategory(name = request.name, description = request.description, parentCategoryId = request.parentCategoryId, userId = user.id!!)
                     )
+            }
+            .flatMap {
                 Mono.empty()
             }
 
@@ -44,6 +46,8 @@ class RecipeCategoryService(
             .flatMap { user ->
                 repository
                     .updateCategory(id, request.name, request.description, request.parentCategoryId, user.id!!)
+            }
+            .flatMap {
                 Mono.empty()
             }
 

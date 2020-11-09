@@ -72,6 +72,8 @@ class RecipeService(
                         userId = user.id!!
                     )
                 )
+            }
+            .flatMap {
                 Mono.empty()
             }
 
@@ -90,6 +92,8 @@ class RecipeService(
                         request.url,
                         request.categoryId,
                         it.id!!)
+            }
+            .flatMap {
                 Mono.empty()
             }
 

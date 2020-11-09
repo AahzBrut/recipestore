@@ -25,6 +25,8 @@ class RecipeStepService(
             .flatMap { user ->
                 repository
                     .save(RecipeStep(null, request.name, request.description, request.ordinal, recipeId, user.id!!))
+            }
+            .flatMap {
                 Mono.empty()
             }
 
@@ -66,6 +68,8 @@ class RecipeStepService(
                         request.description,
                         request.ordinal,
                         it.id!!)
+            }
+            .flatMap {
                 Mono.empty()
             }
 

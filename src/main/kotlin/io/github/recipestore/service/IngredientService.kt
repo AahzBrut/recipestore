@@ -31,6 +31,7 @@ class IngredientService(
                     .save(
                         Ingredient(name = request.name, description = request.description, categoryId = request.categoryId, userId = user.id!!)
                     )
+            }.flatMap {
                 Mono.empty()
             }
 

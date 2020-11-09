@@ -17,7 +17,7 @@
             <column name="NAME" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="DESCRIPTION" type="CLOB"/>
+            <column name="DESCRIPTION" type="TEXT"/>
             <column name="INGREDIENT_CATEGORY_ID" type="INT">
                 <constraints nullable="false"/>
             </column>
