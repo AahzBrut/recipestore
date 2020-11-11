@@ -26,7 +26,7 @@ class IngredientCategoryService(
         repository.findById(id)
             .flatMap(::mapCategoryProperties)
 
-    fun addCategory(userName: String, request: CategoryRequest): Mono<Void> =
+    fun addCategory(userName: String, request: CategoryRequest): Mono<IngredientCategory> =
         userRepository
             .findByName(userName)
             .flatMap { user ->
@@ -36,17 +36,17 @@ class IngredientCategoryService(
                     )
             }
             .flatMap {
-                Mono.empty()
+                getCategory(it.id!!)
             }
 
-    fun updateCategory(id: Long, userName: String, request: CategoryRequest): Mono<Void> =
+    fun updateCategory(id: Long, userName: String, request: CategoryRequest): Mono<IngredientCategory> =
         userRepository
             .findByName(userName)
             .flatMap { user ->
                 repository
                     .updateCategory(id, request.name, request.description, request.parentCategoryId, user.id!!)
             }.flatMap {
-                Mono.empty()
+                getCategory(id)
             }
 
     fun deleteCategory(id: Long): Mono<Void> = repository.deleteById(id)
