@@ -35,7 +35,7 @@ class IngredientCategoryController(
             .getAllCategories()
 
 
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(INGREDIENTS_CATEGORIES_PATH,
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE])
@@ -50,7 +50,7 @@ class IngredientCategoryController(
         service
             .getCategory(id)
 
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping(INGREDIENTS_CATEGORIES_BY_ID_PATH,
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE])
