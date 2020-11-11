@@ -30,7 +30,7 @@ class RecipeStepController(
     @PostMapping(RECIPE_STEPS_PATH,
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun addRecipeStep(principal: Principal, @PathVariable recipeId: Long, @RequestBody request: RecipeStepAddRequest): Mono<Void> =
+    fun addRecipeStep(principal: Principal, @PathVariable recipeId: Long, @RequestBody request: RecipeStepAddRequest): Mono<RecipeStep> =
         service.addRecipeStep(principal.name, recipeId, request)
 
     @ResponseStatus(HttpStatus.OK)
@@ -48,7 +48,7 @@ class RecipeStepController(
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(RECIPE_STEP_BY_ID_PATH,
         produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun updateRecipe(principal: Principal, @PathVariable id: Long, @RequestBody request: RecipeStepAddRequest): Mono<Void> =
+    fun updateRecipe(principal: Principal, @PathVariable id: Long, @RequestBody request: RecipeStepAddRequest): Mono<RecipeStep> =
         service.updateRecipeStep(principal.name, id, request)
 
     @ResponseStatus(HttpStatus.OK)

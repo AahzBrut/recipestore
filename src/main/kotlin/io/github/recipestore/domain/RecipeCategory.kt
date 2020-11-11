@@ -32,14 +32,15 @@ data class RecipeCategory(
     var created: LocalDateTime = LocalDateTime.now(),
 
     @Column("MODIFIED")
-    var modified: LocalDateTime = LocalDateTime.now(),
+    var modified: LocalDateTime = LocalDateTime.now()
+    ) {
 
     @Transient
-    var childCategories: List<RecipeCategory> = mutableListOf(),
+    var childCategories: List<RecipeCategory> = mutableListOf()
 
     @Transient
-    var recipes: List<Recipe> = mutableListOf(),
+    var recipes: List<Recipe> = mutableListOf()
 
     @Transient
-    var user: User? = null,
-    )
+    var user: User? = null
+}

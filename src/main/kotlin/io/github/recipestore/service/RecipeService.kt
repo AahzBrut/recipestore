@@ -56,7 +56,7 @@ class RecipeService(
                     }
             }
 
-    fun addRecipe(userName: String, request: RecipeRequest): Mono<Void> =
+    fun addRecipe(userName: String, request: RecipeRequest): Mono<Recipe> =
         userRepository
             .findByName(userName)
             .flatMap { user ->
@@ -74,11 +74,11 @@ class RecipeService(
                 )
             }
             .flatMap {
-                Mono.empty()
+                getRecipe(it.id!!)
             }
 
 
-    fun updateRecipe(id: Long, userName: String, request: RecipeRequest): Mono<Void> =
+    fun updateRecipe(id: Long, userName: String, request: RecipeRequest): Mono<Recipe> =
         userRepository
             .findByName(userName)
             .flatMap {
@@ -94,7 +94,7 @@ class RecipeService(
                         it.id!!)
             }
             .flatMap {
-                Mono.empty()
+                getRecipe(id)
             }
 
     fun deleteRecipe(id: Long): Mono<Void> =
