@@ -27,7 +27,7 @@ class RecipeController(
     private val service: RecipeService
 ) {
 
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(RECIPES_PATH,
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE])
@@ -46,7 +46,7 @@ class RecipeController(
     fun getAllRecipes(principal: Principal): Flux<Recipe> =
         service.getAllRecipes()
 
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping(RECIPES_BY_ID_PATH,
         produces = [MediaType.APPLICATION_JSON_VALUE])
     fun updateRecipe(principal: Principal, @PathVariable id: Long, @RequestBody request: RecipeRequest): Mono<Recipe> =

@@ -30,7 +30,7 @@ class IngredientController(
     private val service: IngredientService
 ) {
 
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(INGREDIENTS_PATH,
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE])
@@ -49,7 +49,7 @@ class IngredientController(
     fun getAllIngredients(principal: Principal): Flux<Ingredient> =
         service.getAllIngredients()
 
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping(INGREDIENTS_BY_ID_PATH,
         produces = [MediaType.APPLICATION_JSON_VALUE])
     fun updateIngredient(principal: Principal, @PathVariable id: Long, @RequestBody request: IngredientRequest): Mono<Ingredient> =
@@ -62,7 +62,7 @@ class IngredientController(
         service
             .deleteIngredient(id)
 
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(INGREDIENTS_IMAGE_PATH,
         consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
     fun setImage(principal: Principal, @PathVariable id: Long, @RequestPart("image") image: Mono<FilePart>): Mono<Void> =

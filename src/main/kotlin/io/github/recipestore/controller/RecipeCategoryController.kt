@@ -33,7 +33,7 @@ class RecipeCategoryController(
             .getAllCategories()
 
 
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(RECIPE_CATEGORIES_PATH,
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE])
@@ -48,7 +48,7 @@ class RecipeCategoryController(
         service
             .getCategory(id)
 
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping(RECIPE_CATEGORIES_BY_ID_PATH,
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE])
