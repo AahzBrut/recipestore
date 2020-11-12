@@ -4,7 +4,7 @@ import io.github.recipestore.domain.Roles
 import io.github.recipestore.domain.User
 import io.github.recipestore.dto.request.LoginRequest
 import io.github.recipestore.dto.request.UserRolesAddRequest
-import io.github.recipestore.mapper.UserAddRolesMerger
+import io.github.recipestore.mapper.UserAddRoles
 import io.github.recipestore.repository.UserRepository
 import io.github.recipestore.service.security.JwtService
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -18,7 +18,7 @@ class UserService(
     private val userRepository: UserRepository,
     private val jwtService: JwtService,
     private val userRoleService: UserRoleService,
-    private val userAddRolesMerger: UserAddRolesMerger
+    private val userAddRoles: UserAddRoles
 ) {
 
     fun login(request: LoginRequest): Mono<String> = userRepository
@@ -36,13 +36,13 @@ class UserService(
     fun getAllUsers(): Flux<User> = userRepository
         .findAll()
         .flatMap {
-            userAddRolesMerger.merge(Mono.just(it), userRoleService.getUserRoles(it.id!!))
+            userAddRoles.merge(Mono.just(it), userRoleService.getUserRoles(it.id!!))
         }
 
     fun getUser(userId: Long): Mono<User> = userRepository
         .findById(userId)
         .flatMap {
-            userAddRolesMerger.merge(Mono.just(it), userRoleService.getUserRoles(it.id!!))
+            userAddRoles.merge(Mono.just(it), userRoleService.getUserRoles(it.id!!))
         }
 
     fun addUser(request: LoginRequest): Mono<Void> = Mono.just(request)

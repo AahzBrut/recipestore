@@ -2,6 +2,8 @@ package io.github.recipestore.service
 
 import io.github.recipestore.domain.Ingredient
 import io.github.recipestore.dto.request.IngredientRequest
+import io.github.recipestore.mapper.IngredientAddCategory
+import io.github.recipestore.mapper.IngredientAddUser
 import io.github.recipestore.repository.IngredientCategoryRepository
 import io.github.recipestore.repository.IngredientRepository
 import io.github.recipestore.repository.UserRepository
@@ -18,7 +20,9 @@ import java.nio.file.Path
 class IngredientService(
     private val repository: IngredientRepository,
     private val userRepository: UserRepository,
-    private val ingredientCategoryRepository: IngredientCategoryRepository
+    private val ingredientCategoryRepository: IngredientCategoryRepository,
+    private val ingredientAddCategory: IngredientAddCategory,
+    private val ingredientAddUser: IngredientAddUser
 ) {
 
     @Value("\${ingredients-images-path}")
@@ -29,56 +33,22 @@ class IngredientService(
             .flatMap { user ->
                 repository
                     .save(Ingredient(name = request.name, description = request.description, categoryId = request.categoryId, userId = user.id!!))
-            }.flatMap {
-                getIngredient(it.id!!)
-            }
+            }.flatMap { getIngredient(it.id!!) }
 
     fun getAllIngredients(): Flux<Ingredient> =
         repository.findAll()
-            .flatMap { ingredient ->
-                Mono.just(ingredient)
-                    .zipWith(ingredientCategoryRepository.findById(ingredient.categoryId))
-                    .map { tuple ->
-                        tuple.t1.category = tuple.t2
-                        tuple.t1
-                    }
-            }
-            .flatMap { ingredient ->
-                Mono.just(ingredient)
-                    .zipWith(userRepository.findById(ingredient.userId))
-                    .map { tuple ->
-                        tuple.t1.user = tuple.t2
-                        tuple.t1
-                    }
-            }
+            .flatMap { ingredientAddCategory.merge(Mono.just(it), ingredientCategoryRepository.findById(it.categoryId)) }
+            .flatMap { ingredientAddUser.merge(Mono.just(it), userRepository.findById(it.userId)) }
 
     fun getIngredient(id: Long): Mono<Ingredient> =
         repository.findById(id)
-            .flatMap { ingredient ->
-                Mono.just(ingredient)
-                    .zipWith(ingredientCategoryRepository.findById(ingredient.categoryId))
-                    .map { tuple ->
-                        tuple.t1.category = tuple.t2
-                        tuple.t1
-                    }
-            }
-            .flatMap { ingredient ->
-                Mono.just(ingredient)
-                    .zipWith(userRepository.findById(ingredient.userId))
-                    .map { tuple ->
-                        tuple.t1.user = tuple.t2
-                        tuple.t1
-                    }
-            }
+            .flatMap { ingredientAddCategory.merge(Mono.just(it), ingredientCategoryRepository.findById(it.categoryId)) }
+            .flatMap { ingredientAddUser.merge(Mono.just(it), userRepository.findById(it.userId)) }
 
     fun updateIngredient(userName: String, id: Long, request: IngredientRequest): Mono<Ingredient> =
         userRepository.findByName(userName)
-            .flatMap {
-                repository.updateIngredient(id, request.name, request.description, request.categoryId, it.id!!)
-            }
-            .flatMap {
-                getIngredient(id)
-            }
+            .flatMap { repository.updateIngredient(id, request.name, request.description, request.categoryId, it.id!!) }
+            .flatMap { getIngredient(id) }
 
     fun deleteIngredient(id: Long): Mono<Void> = repository.deleteById(id)
 

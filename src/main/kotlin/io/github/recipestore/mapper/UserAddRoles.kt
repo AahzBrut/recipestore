@@ -7,7 +7,7 @@ import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @Service
-class UserAddRolesMerger : Merger<User, Role> {
+class UserAddRoles : Merger<User, Role> {
 
     override fun merge(target: Mono<User>, source: Flux<Role>): Mono<User> =
         target
